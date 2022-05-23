@@ -1,7 +1,7 @@
 let gameConfig = {
     type: Phaser.AUTO,
-    width: 1920,
-    height: 1080,
+    width: 1080,
+    height: 720,
     backgroundColor: '#ffffff',
     parent: 'game',
     physics: {
@@ -11,6 +11,6 @@ let gameConfig = {
             gravity: { y: 100 }
         }
     },
-    scene: new Tableau1()
+    scene: new Scene()
 };
 let game = new Phaser.Game(gameConfig);

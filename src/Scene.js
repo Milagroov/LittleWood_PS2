@@ -1,4 +1,4 @@
-class Tableau1 extends Phaser.Scene {
+class scene extends Phaser.Scene {
 
   preload() {
 
@@ -30,7 +30,7 @@ class Tableau1 extends Phaser.Scene {
     this.player.setCollideWorldBounds(true);
     this.physics.add.collider(this.player, terre);
 
-    this.cameras.main.startFollow(this.player, true,1, 0);
+    this.cameras.main.startFollow(this.player, true,0, 0);
 
     this.initKeyboard();
   }
@@ -44,6 +44,20 @@ class Tableau1 extends Phaser.Scene {
           break;
         case Phaser.Input.Keyboard.KeyCodes.LEFT:
           me.player.setVelocityX(-200);
+          break;
+        case Phaser.Input.Keyboard.KeyCodes.UP:
+          break;
+        case Phaser.Input.Keyboard.KeyCodes.DOWN:
+          break;
+      }
+    });
+    this.input.keyboard.on('keyup', function (kevent) {
+      switch (kevent.keyCode) {
+        case Phaser.Input.Keyboard.KeyCodes.RIGHT:
+          me.player.setVelocityX(0);
+          break;
+        case Phaser.Input.Keyboard.KeyCodes.LEFT:
+          me.player.setVelocityX(0);
           break;
         case Phaser.Input.Keyboard.KeyCodes.UP:
           break;
