@@ -22,48 +22,35 @@ class scene extends Phaser.Scene {
 
     const map = this.make.tilemap({key: 'map'});
     const tileset = map.addTilesetImage('tileset', 'tiles');
-    const terre = map.createStaticLayer('terre', tileset, 0, -200);
-    terre.setCollisionByExclusion(-1, true);
 
-    this.player = this.physics.add.sprite(0, 879, 'player')
-    this.player.setBounce(0.1);
-    this.player.setCollideWorldBounds(true);
-    this.physics.add.collider(this.player, terre);
+    this.platforms = map.createStaticLayer('terre', tileset);
+    this.platforms.setCollisionByExclusion(-1, true);
+
+    //controles
+    keygauche = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
+    keybas = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
+    keydroite = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
+    keyespace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+
+    //variables
+    Vapeur = false;
+    Magique = false;
+
+
+    this.player = new Player(this);
 
     this.cameras.main.startFollow(this.player, true,0, 0);
-
-    this.initKeyboard();
   }
 
-  initKeyboard() {
-    let me = this;
-    this.input.keyboard.on('keydown', function (kevent) {
-      switch (kevent.keyCode) {
-        case Phaser.Input.Keyboard.KeyCodes.RIGHT:
-          me.player.setVelocityX(200);
-          break;
-        case Phaser.Input.Keyboard.KeyCodes.LEFT:
-          me.player.setVelocityX(-200);
-          break;
-        case Phaser.Input.Keyboard.KeyCodes.UP:
-          break;
-        case Phaser.Input.Keyboard.KeyCodes.DOWN:
-          break;
-      }
-    });
-    this.input.keyboard.on('keyup', function (kevent) {
-      switch (kevent.keyCode) {
-        case Phaser.Input.Keyboard.KeyCodes.RIGHT:
-          me.player.setVelocityX(0);
-          break;
-        case Phaser.Input.Keyboard.KeyCodes.LEFT:
-          me.player.setVelocityX(0);
-          break;
-        case Phaser.Input.Keyboard.KeyCodes.UP:
-          break;
-        case Phaser.Input.Keyboard.KeyCodes.DOWN:
-          break;
-      }
-    });
+  update(){
+
+    this.player.move();
+
+
   }
+
+
+
+
+
 }

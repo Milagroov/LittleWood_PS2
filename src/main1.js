@@ -1,7 +1,7 @@
 let gameConfig = {
     type: Phaser.AUTO,
-    width: 1080,
-    height: 720,
+    width: 1920,
+    height: 1080,
     backgroundColor: '#ffffff',
     parent: 'game',
     physics: {
@@ -11,6 +11,13 @@ let gameConfig = {
             gravity: { y: 100 }
         }
     },
-    scene: new Scene()
+    scene: new scene()
 };
 let game = new Phaser.Game(gameConfig);
+
+let keygauche;
+let keybas;
+let keydroite;
+let keyespace;
+let Vapeur;
+let Magique;
