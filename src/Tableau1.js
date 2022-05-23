@@ -2,10 +2,10 @@ class Tableau1 extends Phaser.Scene{
 
     preload() {
 
-        this.load.image('fond1', 'assets/images/fond1.png');
-        this.load.image('fond2', 'assets/images/fond2.png');
-        this.load.image('fond3', 'assets/images/fond3.png');
-        this.load.image('fond4', 'assets/images/fond4.png');
+        this.load.image('fond1', 'assets/fonds/fond1.png');
+        this.load.image('fond2', 'assets/fonds/fond2.png');
+        this.load.image('fond3', 'assets/fonds/fond3.png');
+        this.load.image('fond4', 'assets/fonds/fond4.png');
 
         this.load.image('tiles', 'assets/tilesets/tileset.png');
         this.load.image('ronce', 'assets/tilesets/ronces.png');

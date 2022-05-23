@@ -4,12 +4,18 @@ body{
     background-color: #000000;
     text-align: center;
 }
-a{
+a {
     color: #808080;
     text-transform: uppercase;
     text-decoration: none;
     transition: color 1s;
 }
+
+p{
+    color: #32CD32;
+    font-size: 20px;
+}
+
 a:hover{
     color: #ff0000;
     text-decoration: underline;
