@@ -1,40 +1,55 @@
-class Tableau1 extends Phaser.Scene{
+class Tableau1 extends Phaser.Scene {
 
-    preload() {
+  preload() {
 
-        this.load.image('fond1', 'assets/fonds/fond1.png');
-        this.load.image('fond2', 'assets/fonds/fond2.png');
-        this.load.image('fond3', 'assets/fonds/fond3.png');
-        this.load.image('fond4', 'assets/fonds/fond4.png');
+    this.load.image('fond1', 'assets/fonds/fond1.png');
+    this.load.image('fond2', 'assets/fonds/fond2.png');
+    this.load.image('fond3', 'assets/fonds/fond3.png');
+    this.load.image('fond4', 'assets/fonds/fond4.png');
 
-        this.load.image('tiles', 'assets/tilesets/tileset.png');
-        this.load.image('ronce', 'assets/tilesets/ronces.png');
-        this.load.image('ronce', 'assets/tilesets/nuage.png');
-        this.load.image('ronce', 'assets/tilesets/nuage_magique.png');
+    this.load.image('tiles', 'assets/tilesets/tileset.png');
+    this.load.image('ronce', 'assets/tilesets/ronces.png');
+    this.load.image('nuage', 'assets/tilesets/nuage.png');
+    this.load.image('nuagemg', 'assets/tilesets/nuage_magique.png');
 
+    this.load.spritesheet('player', 'assets/images/player.png', {frameWidth: 48, frameHeight: 48});
+    this.load.tilemapTiledJSON('map', 'assets/tilemaps/level.json');
+  }
 
-        this.load.spritesheet('player', 'assets/images/player.png', {frameWidth: 48, frameHeight: 48});
-        this.load.tilemapTiledJSON('map', 'assets/tilemaps/level1.tmj');
+  create() {
 
-    }
+    const bg1 = this.add.image(0, 0, 'fond1').setOrigin(0, 0);
 
-    create() {
+    const map = this.make.tilemap({key: 'map'});
+    const tileset = map.addTilesetImage('tileset', 'tiles');
+    const terre = map.createStaticLayer('terre', tileset, 0, -200);
+    terre.setCollisionByExclusion(-1, true);
 
-        this.bg1 = this.add.image(0, 0, 'fond1').setOrigin(0, 0);
+    this.player = this.physics.add.sprite(0, 879, 'player')
+    this.player.setBounce(0.1);
+    this.player.setCollideWorldBounds(true);
+    this.physics.add.collider(this.player, terre);
 
-        const map = this.make.tilemap({ key: 'map' });
-        const tileset = map.addTilesetImage('tileset', 'tiles');
-        const terre = map.createStaticLayer('terre', tileset, 0, 200);
-        terre.setCollisionByExclusion(-1, true);
+    this.cameras.main.startFollow(this.player, true,1, 0);
 
-        this.player = this.physics.add.sprite(200, 100, "player")
-        this.player.flipX = true;
-        this.player.setBounce(0.2);
-        this.player.setCollideWorldBounds(true);
-        this.player.setDepth(0);
+    this.initKeyboard();
+  }
 
-        this.cameras.main.startFollow(this.player);
-    }
-
-
+  initKeyboard() {
+    let me = this;
+    this.input.keyboard.on('keydown', function (kevent) {
+      switch (kevent.keyCode) {
+        case Phaser.Input.Keyboard.KeyCodes.RIGHT:
+          me.player.setVelocityX(200);
+          break;
+        case Phaser.Input.Keyboard.KeyCodes.LEFT:
+          me.player.setVelocityX(-200);
+          break;
+        case Phaser.Input.Keyboard.KeyCodes.UP:
+          break;
+        case Phaser.Input.Keyboard.KeyCodes.DOWN:
+          break;
+      }
+    });
+  }
 }
