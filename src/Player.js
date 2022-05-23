@@ -4,7 +4,7 @@ class Player {
     this.scene = scene
     this.cameras = scene
 
-    this.player = this.scene.physics.add.sprite(20, 879, 'j1');
+    this.player = this.scene.physics.add.sprite(0, 879, 'player');
     this.player.setBounce(0);
     this.player.setCollideWorldBounds(false);
     this.scene.physics.add.collider(this.player, this.scene.platforms);

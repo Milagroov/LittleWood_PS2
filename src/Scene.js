@@ -23,7 +23,7 @@ class scene extends Phaser.Scene {
     const map = this.make.tilemap({key: 'map'});
     const tileset = map.addTilesetImage('tileset', 'tiles');
 
-    this.platforms = map.createStaticLayer('terre', tileset);
+    this.platforms = map.createStaticLayer('terre', tileset,0,-200);
     this.platforms.setCollisionByExclusion(-1, true);
 
     //controles
@@ -39,7 +39,7 @@ class scene extends Phaser.Scene {
 
     this.player = new Player(this);
 
-    this.cameras.main.startFollow(this.player, true,0, 0);
+    this.cameras.main.startFollow(this.player.player, true,1, 1);
   }
 
   update(){
