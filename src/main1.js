@@ -19,5 +19,4 @@ let keygauche;
 let keybas;
 let keydroite;
 let keyespace;
-let Vapeur;
-let Magique;
+let mode;
