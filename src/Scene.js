@@ -2,10 +2,10 @@ class scene extends Phaser.Scene {
 
   preload() {
 
-    this.load.image('fond1', 'assets/fonds/fond1.png');
-    this.load.image('fond2', 'assets/fonds/fond2.png');
-    this.load.image('fond3', 'assets/fonds/fond3.png');
-    this.load.image('fond4', 'assets/fonds/fond4.png');
+    this.load.image('bg1', 'assets/fonds/fond1.png');
+    this.load.image('bg2', 'assets/fonds/fond2.png');
+    this.load.image('bg3', 'assets/fonds/fond3.png');
+    this.load.image('bg4', 'assets/fonds/fond4.png');
 
     this.load.image('tiles', 'assets/tilesets/tileset.png');
     this.load.image('ronce', 'assets/tilesets/ronces.png');
@@ -19,21 +19,21 @@ class scene extends Phaser.Scene {
   create() {
 
     //const bg1 = this.add.image(0, 0, 'fond1').setOrigin(0, 0);
-
     const map = this.make.tilemap({key: 'map'});
     const tileset = map.addTilesetImage('tileset', 'tiles');
-    const fond1tile = map.addTilesetImage('tilesetf1', 'fond1');
-    const fond2tile = map.addTilesetImage('tilesetf2', 'fond2');
-    const fond3tile = map.addTilesetImage('tilesetf3', 'fond3');
-    const fond4tile = map.addTilesetImage('tilesetf4', 'fond4');
+    const fond1tile = map.addTilesetImage('fond1', 'bg1');
+    const fond2tile = map.addTilesetImage('fond2', 'bg2');
+    const fond3tile = map.addTilesetImage('fond3', 'bg3');
+    const fond4tile = map.addTilesetImage('fond4', 'bg4');
 
 
-    //calque terre
-    this.platforms = map.createStaticLayer('terre', tileset,0,0/*-200*/);
-    this.platforms.setCollisionByExclusion(-1, true);
-
-    //calque fond1
+    //calque fonds
     this.fond1 = map.createStaticLayer('fond1t', fond1tile,0,0);
+    this.fond2 = map.createStaticLayer('fond2t', fond2tile,0,0);
+    this.fond3 = map.createStaticLayer('fond3t', fond3tile,0,0);
+    this.fond4 = map.createStaticLayer('fond4t', fond4tile,0,0);
+    this.platforms = map.createStaticLayer('terre', tileset,0,0);
+    this.platforms.setCollisionByExclusion(-1, true);
 
     //groupe ronces
     this.roncesgroup= this.physics.add.group({
@@ -77,13 +77,11 @@ class scene extends Phaser.Scene {
     this.player = new Player(this);
 
     this.cameras.main.startFollow(this.player.player, true,1, 0);
-    this.inputManager();
 
   }
 
   update(){
     this.player.move();
-    this.player.modeswitch();
   }
 
 

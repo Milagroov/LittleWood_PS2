@@ -3,8 +3,8 @@ class Player {
   constructor(scene) {
     this.scene = scene
     this.cameras = scene
-
-    this.player = this.scene.physics.add.sprite(0, 540, 'player');
+    this.lock=false
+    this.player = this.scene.physics.add.sprite(0, 700, 'player');
     this.player.setBounce(0);
     this.player.setCollideWorldBounds(false);
 
@@ -14,11 +14,10 @@ class Player {
     this.scene.physics.add.collider(this.player, this.scene.roncesgroup, playerHit, null, this);
 
 
-    if (mode == true){
+    if (mode == true) {
       this.scene.physics.add.collider(this.player, this.scene.nuagesgroup);
       this.scene.nuagesgroup.setAlpha(1);
-    }
-    else{
+    } else {
       this.scene.physics.add.collider(this.player, this.scene.nuagesMgroup);
       this.scene.nuagesMgroup.setAlpha(1);
     }
@@ -42,8 +41,7 @@ class Player {
   }
 
   jump() {
-    if (this.player.body.onFloor())
-    {
+    if (this.player.body.onFloor()) {
       this.player.setVelocityY(-600);
     }
   }
@@ -80,23 +78,19 @@ class Player {
       case this.player.body.onFloor():
         this.moveIdle();
         break;
-
+      case  keybas.isDown:
+        if(this.lock===false) {
+          this.lock=true
+          mode = !mode
+        }
+        break;
+      case keybas.isUp:
+        this.lock=false
     }
   }
-
-  modeswitch(){
-    if (keybas.isDown){
-      if (mode == true){
-        mode = false;
-      }
-      else{
-        mode = true;
-      }
-    }
-  }
-
-
-
-
 }
+
+
+
+
 
