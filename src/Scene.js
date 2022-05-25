@@ -39,6 +39,12 @@ class Scene extends Phaser.Scene {
     this.platforms = map.createStaticLayer('terre', tileset,0,0);
     this.platforms.setCollisionByExclusion(-1, true);
 
+    //PARALLAXE
+    this.fond2.scrollFactorX=0.4;
+    this.fond3.scrollFactorX=0.6;
+    this.fond4.scrollFactorX=0.8;
+    this.platforms.scrollFactorX=1;
+    
     //groupe ronces
     this.roncesgroup= this.physics.add.group({
       allowGravity: false,
