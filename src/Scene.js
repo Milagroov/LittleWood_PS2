@@ -68,24 +68,56 @@ class Scene extends Phaser.Scene {
     });
     this.nuagesMgroup.setAlpha(0);
 
-    //controles
-    keygauche = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
-    keybas = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
-    keydroite = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
-    keyespace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-
     //variables
-    mode = false;
+    this.mode = false;
+    this.lockmode = false
 
 
     this.player = new Player(this);
 
     this.cameras.main.startFollow(this.player.player, true,1, 0);
 
+    this.cursors = this.input.keyboard.createCursorKeys();
   }
 
   update(){
-    this.player.move();
+
+    if (this.cursors.down.isDown && this.lockmode === false){
+      this.mode = !this.mode
+      this.lockmode = true
+    }
+
+    if (this.cursors.down.isUp){
+      this.lockmode = false
+    }
+
+    if (this.cursors.space.isDown && this.player.player.body.onFloor() && this.saut === false) {
+      this.player.jump()
+      this.saut = true;
+    }
+    if (this.cursors.space.isUp){
+      this.saut = false;
+    }
+
+    if (this.cursors.left.isDown ){
+      this.player.moveLeft();
+    }
+    else if (this.cursors.right.isDown){
+      this.player.moveRight();
+    }
+    else {
+      this.player.moveIdle();
+    }
+
+    if (this.mode === true){
+      this.nuagesgroup.setAlpha(1);
+      this.nuagesMgroup.setAlpha(0);
+    }
+    else{
+      this.nuagesgroup.setAlpha(0);
+      this.nuagesMgroup.setAlpha(1);
+    }
+
   }
 
 

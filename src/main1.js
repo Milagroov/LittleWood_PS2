@@ -15,10 +15,4 @@ let gameConfig = {
 };
 let game = new Phaser.Game(gameConfig);
 
-let keygauche;
-let keybas;
-let keydroite;
-let keyespace;
-let mode;
-
 let langue = {langue:String,texture:Phaser.Textures};
