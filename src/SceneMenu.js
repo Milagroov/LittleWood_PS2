@@ -14,6 +14,7 @@ class SceneMenu extends Phaser.Scene {
 
         this.load.image('signs', 'assets/ui/languagesign.png');
         this.load.image('title', 'assets/ui/littlewoodicon.png');
+        this.load.image('fondmenu','assets/fonds/fondmenu.png');
 
         this.load.image('enf', 'assets/ui/flags/english.png');
         this.load.image('frf', 'assets/ui/flags/france.png');
@@ -28,10 +29,13 @@ class SceneMenu extends Phaser.Scene {
 
         this.emitter = new Phaser.Events.EventEmitter();
 
+        let fondaccueil = this.add.image(960,540,'fondmenu');
+        fondaccueil.setScale(1);
+
         let languagesign = this.add.image(225,410,'signs');
         languagesign.setScale(1);
 
-        let titlelogo = this.add.image(1025,400,'title');
+        let titlelogo = this.add.image(1025,380,'title');
         titlelogo.setScale(0.6);
 
 
@@ -79,6 +83,9 @@ class SceneMenu extends Phaser.Scene {
             else if (langue.langue === "jp"){
                 this.playbutton.setTexture("playoverjp")
             }
+            else{
+                this.playbutton.setTexture("playoverfr")
+            }
         })
 
         this.playbutton.on("pointerout",()=>{
@@ -91,6 +98,9 @@ class SceneMenu extends Phaser.Scene {
             }
             else if (langue.langue === "jp"){
                 this.playbutton.setTexture("playjp")
+            }
+            else{
+                this.playbutton.setTexture("playfr")
             }
         })
 
@@ -137,6 +147,6 @@ class SceneMenu extends Phaser.Scene {
                 this.jpflag.setTexture('jpf');
                 break;
         }
-
     }
+
 }
