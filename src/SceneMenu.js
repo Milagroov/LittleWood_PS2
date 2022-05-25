@@ -26,6 +26,8 @@ class SceneMenu extends Phaser.Scene {
 
     create(){
 
+        this.emitter = new Phaser.Events.EventEmitter();
+
         let languagesign = this.add.image(225,410,'signs');
         languagesign.setScale(1);
 
@@ -35,133 +37,106 @@ class SceneMenu extends Phaser.Scene {
 
 
         //BUTTONS
-        let frflag = this.add.image(225,340,'frnbf');
-        frflag.setScale(0.1);
-        frflag.setInteractive();
+        this.frflag = this.add.image(225,340,'frnbf');
+        this.frflag.setScale(0.1);
+        this.frflag.setInteractive();
 
-        let enflag = this.add.image(225,540,'ennbf');
-        enflag.setScale(0.1);
-        enflag.setInteractive();
+        this.enflag = this.add.image(225,540,'ennbf');
+        this.enflag.setScale(0.1);
+        this.enflag.setInteractive();
 
-        let jpflag = this.add.image(225,745,'jpnbf');
-        jpflag.setScale(0.1);
-        jpflag.setInteractive();
+        this.jpflag = this.add.image(225,745,'jpnbf');
+        this.jpflag.setScale(0.1);
+        this.jpflag.setInteractive();
 
-        let playbutton = this.add.image(1025,700,'playfr');
-        playbutton.setScale(1);
-        playbutton.setInteractive();
+        this.playbutton = this.add.image(1025,700,'playfr');
+        this.playbutton.setScale(1);
+        this.playbutton.setInteractive();
 
-
-        //CHANGEMENT TEXTURES & LANGUES
-
-        frflag.on("pointerover",()=>{
-            //console.log("over")
-            frflag.setTexture('frf')
-        })
-
-        frflag.on("pointerout",()=>{
-            //console.log("out")
-            frflag.setTexture('frnbf')
-        })
-
-        frflag.on("pointerup",()=>{
+        this.frflag.on("pointerup",()=>{
             //console.log("fr")
-            langue = 'fr'
-            frflag.setTexture('frf')
+            this.emitter.emit('changelangue',['fr','playfr',0])
         })
 
-        enflag.on("pointerover",()=>{
-            //console.log("over")
-            enflag.setTexture('enf')
-        })
-
-        enflag.on("pointerout",()=>{
-            //console.log("out")
-            enflag.setTexture('ennbf')
-        })
-
-        enflag.on("pointerup",()=>{
+        this.enflag.on("pointerup",()=>{
             //console.log("en")
-            langue = 'en'
-            enflag.setTexture('enf')
+            this.emitter.emit('changelangue',['en','playen',1])
         })
 
-        jpflag.on("pointerover",()=>{
-            //console.log("over")
-            jpflag.setTexture('jpf')
-        })
-
-        jpflag.on("pointerout",()=>{
-            //console.log("out")
-            jpflag.setTexture('jpnbf')
-        })
-
-        jpflag.on("pointerup",()=>{
+        this.jpflag.on("pointerup",()=>{
             //console.log("jp")
-            langue = 'jp'
-            jpflag.setTexture('jpf')
+            this.emitter.emit('changelangue',['jp','playjp',2])
         })
 
-
-        //LANGUES
-        if (langue === "en"){
-            playbutton.setTexture('playen')
-            enflag.setTexture('enf')
-        }
-        else if (langue === "fr"){
-            playbutton.setTexture("playfr")
-            frflag.setTexture('frf')
-        }
-        else {
-            playbutton.setTexture("playjp")
-            jpflag.setTexture('jpf')
-        }
-
-
-        playbutton.on("pointerover",()=>{
+        this.playbutton.on("pointerover",()=>{
             //console.log("over")
-            if (langue === "en"){
-                playbutton.setTexture('playoveren')
+            if (langue.langue === "en"){
+                this.playbutton.setTexture('playoveren')
             }
-            else if (langue === "fr"){
-                playbutton.setTexture("playoverfr")
+            else if (langue.langue === "fr"){
+                this.playbutton.setTexture("playoverfr")
             }
-            else {
-                playbutton.setTexture("playoverjp")
+            else if (langue.langue === "jp"){
+                this.playbutton.setTexture("playoverjp")
             }
         })
 
-        playbutton.on("pointerout",()=>{
+        this.playbutton.on("pointerout",()=>{
             //console.log("out")
-            if (langue === "en"){
-                playbutton.setTexture('playen')
+            if (langue.langue === "en"){
+                this.playbutton.setTexture('playen')
             }
-            else if (langue === "fr"){
-                playbutton.setTexture("playfr")
+            else if (langue.langue === "fr"){
+                this.playbutton.setTexture("playfr")
             }
-            else {
-                playbutton.setTexture("playjp")
+            else if (langue.langue === "jp"){
+                this.playbutton.setTexture("playjp")
             }
         })
 
-        playbutton.on("pointerup",()=>{
+        this.playbutton.on("pointerup",()=>{
             //console.log("up")
-            if (langue === "en"){
-                playbutton.setTexture('playoveren')
+            if (langue.langue === "en"){
+                this.playbutton.setTexture('playoveren')
             }
-            else if (langue === "fr"){
-                playbutton.setTexture("playoverfr")
+            else if (langue.langue === "fr"){
+                this.playbutton.setTexture("playoverfr")
             }
-            else {
-                playbutton.setTexture("playoverjp")
+            else if (langue.langue === "jp"){
+                this.playbutton.setTexture("playoverjp")
             }
 
             this.scene.start("playGame")
         })
 
-
+        this.emitter.on('changelangue',this.handlebutton,this)
     }
 
+    handlebutton(data){
+        //console.log(data[0]);
+        this.playbutton.setTexture(data[1]);
+        langue.langue = data[0];
+        this.flagselected = data[2];
+    }
 
+    update(){
+        switch (this.flagselected){
+            case 0:
+                this.frflag.setTexture('frf');
+                this.enflag.setTexture('ennbf');
+                this.jpflag.setTexture('jpnbf');
+                break;
+            case 1:
+                this.frflag.setTexture('frnbf');
+                this.enflag.setTexture('enf');
+                this.jpflag.setTexture('jpnbf');
+                break;
+            case 2:
+                this.frflag.setTexture('frnbf');
+                this.enflag.setTexture('ennbf');
+                this.jpflag.setTexture('jpf');
+                break;
+        }
 
+    }
 }

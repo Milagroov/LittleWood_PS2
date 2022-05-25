@@ -21,4 +21,4 @@ let keydroite;
 let keyespace;
 let mode;
 
-var langue = "en";
+let langue = {langue:String,texture:Phaser.Textures};
