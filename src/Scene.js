@@ -1,4 +1,8 @@
-class scene extends Phaser.Scene {
+class Scene extends Phaser.Scene {
+
+  constructor (){
+    super("playGame")
+  }
 
   preload() {
 

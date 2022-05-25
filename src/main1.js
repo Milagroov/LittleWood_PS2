@@ -11,7 +11,7 @@ let gameConfig = {
             gravity: { y: 1000 }
         }
     },
-    scene: new scene()
+    scene: [SceneMenu,Scene]
 };
 let game = new Phaser.Game(gameConfig);
 
@@ -20,3 +20,5 @@ let keybas;
 let keydroite;
 let keyespace;
 let mode;
+
+var langue = "en";
