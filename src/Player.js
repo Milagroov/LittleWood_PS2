@@ -2,9 +2,8 @@ class Player {
 
   constructor(scene) {
     this.scene = scene
-    this.cameras = scene
     this.lock=false
-    this.player = this.scene.physics.add.sprite(0, 700, 'player');
+    this.player = this.scene.physics.add.sprite(50, 700, 'player');
     this.player.setBounce(0);
     this.player.setCollideWorldBounds(false);
 
@@ -12,6 +11,8 @@ class Player {
     //COLLIDERS
     this.scene.physics.add.collider(this.player, this.scene.platforms);
     this.scene.physics.add.collider(this.player, this.scene.roncesgroup, playerHit, null, this);
+    this.scene.physics.add.collider(this.player, this.scene.nuagesgroup);
+    this.scene.physics.add.collider(this.player, this.scene.nuagesMgroup);
 
     function playerHit(player, ronces) {
       this.player.setVelocity(0, 0);
@@ -34,6 +35,8 @@ class Player {
 
   create(){
     this.saut = false;
+    this.mode = false;
+    this.lockmode = false;
   }
 
 

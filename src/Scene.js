@@ -11,6 +11,9 @@ class Scene extends Phaser.Scene {
     this.load.image('bg3', 'assets/fonds/fond3.png');
     this.load.image('bg4', 'assets/fonds/fond4.png');
 
+    this.load.image('coeurgele', 'assets/items/coeurgel.png');
+    this.load.image('moonplant', 'assets/items/moonplant.png');
+
     this.load.image('tiles', 'assets/tilesets/tileset.png');
     this.load.image('ronce', 'assets/tilesets/ronces.png');
     this.load.image('nuage', 'assets/tilesets/nuage.png');
@@ -32,11 +35,11 @@ class Scene extends Phaser.Scene {
 
 
     //calque fonds
-    this.fond1 = map.createStaticLayer('fond1t', fond1tile,0,0);
-    this.fond2 = map.createStaticLayer('fond2t', fond2tile,0,0);
-    this.fond3 = map.createStaticLayer('fond3t', fond3tile,0,0);
-    this.fond4 = map.createStaticLayer('fond4t', fond4tile,0,0);
-    this.platforms = map.createStaticLayer('terre', tileset,0,0);
+    this.fond1 = map.createLayer('fond1t', fond1tile,0,0);
+    this.fond2 = map.createLayer('fond2t', fond2tile,0,0);
+    this.fond3 = map.createLayer('fond3t', fond3tile,0,0);
+    this.fond4 = map.createLayer('fond4t', fond4tile,0,0);
+    this.platforms = map.createLayer('terre', tileset,0,0);
     this.platforms.setCollisionByExclusion(-1, true);
 
     //PARALLAXE
@@ -62,7 +65,6 @@ class Scene extends Phaser.Scene {
     map.getObjectLayer('nuagesplan').objects.forEach((nuagesgroup) => {
       const test = this.nuagesgroup.create(nuagesgroup.x, nuagesgroup.y /*-200*/ - nuagesgroup.height, 'nuage').setOrigin(0);
     });
-    this.nuagesgroup.setAlpha(0);
 
     //groupe nuages Magique
     this.nuagesMgroup= this.physics.add.group({
@@ -72,19 +74,45 @@ class Scene extends Phaser.Scene {
     map.getObjectLayer('nuagesmplan').objects.forEach((nuagesMgroup) => {
       const test = this.nuagesMgroup.create(nuagesMgroup.x, nuagesMgroup.y - nuagesMgroup.height, 'nuagemg').setOrigin(0);
     });
-    this.nuagesMgroup.setAlpha(0);
-
-    //variables
-    this.mode = false;
-    this.lockmode = false
-
 
     this.player = new Player(this);
+    this.emitter = new Phaser.Events.EventEmitter();
+
+    this.createCollectible();
 
     this.cameras.main.startFollow(this.player.player, true,1, 0);
-
     this.cursors = this.input.keyboard.createCursorKeys();
+
+    this.itemnum = 0;
+
+    this.events.once('finjeu', this.fin,this);
   }
+
+  createCollectible(){
+    this.coeurG = this.physics.add.sprite(500, 700, 'coeurgele');
+    this.coeurG.body.setAllowGravity(false);
+    this.plant = this.physics.add.sprite(1000, 700, 'moonplant');
+    this.plant.body.setAllowGravity(false);
+    this.physics.add.overlap(this.player.player,this.plant,this.collectMP,null,this);
+    this.physics.add.overlap(this.player.player,this.coeurG,this.collectCG,null,this);
+  }
+
+  collectCG (player, coeurG)
+  {
+    this.coeurG.disableBody(true,true);
+    this.itemnum++;
+  }
+  collectMP (player, coeurG)
+  {
+    this.plant.disableBody(true,true);
+    this.itemnum++;
+  }
+
+  fin(){
+    this.scene.start('finGame')
+  }
+
+
 
   update(){
 
@@ -122,6 +150,10 @@ class Scene extends Phaser.Scene {
     else{
       this.nuagesgroup.setAlpha(0);
       this.nuagesMgroup.setAlpha(1);
+    }
+
+    if (this.itemnum === 2){
+      this.events.emit('finjeu');
     }
 
   }
