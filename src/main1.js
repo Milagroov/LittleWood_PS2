@@ -11,8 +11,10 @@ let gameConfig = {
             gravity: { y: 1000 }
         }
     },
-    scene: [SceneMenu,Scene,SceneEnd]
+    scene: [SceneMenu,SceneOptions,Scene,SceneEnd]
 };
 let game = new Phaser.Game(gameConfig);
 
 let langue = {langue:String,texture:Phaser.Textures};
+let montremode = false
+//LA VARIABLE MONTRE EST INVERSSEE, TRUE VEUT DIRE INACTIF

@@ -2,6 +2,7 @@ class SceneMenu extends Phaser.Scene {
 
     constructor() {
         super("menuGame");
+
     }
 
     preload(){
@@ -12,9 +13,17 @@ class SceneMenu extends Phaser.Scene {
         this.load.image('playoveren', 'assets/ui/play/play_over_en.png');
         this.load.image('playoverjp', 'assets/ui/play/play_over_jp.png');
 
+        this.load.image('optionsfr', 'assets/ui/options/options_fr.png');
+        this.load.image('optionsjp', 'assets/ui/options/options_jp.png');
+        this.load.image('optionsen', 'assets/ui/options/options_en.png');
+        this.load.image('optionsoverfr', 'assets/ui/options/options_over_fr.png');
+        this.load.image('optionsoverjp', 'assets/ui/options/options_over_jp.png');
+        this.load.image('optionsoveren', 'assets/ui/options/options_over_en.png');
+
         this.load.image('signs', 'assets/ui/languagesign.png');
         this.load.image('title', 'assets/ui/littlewoodicon.png');
         this.load.image('fondmenu','assets/fonds/fondmenu.png');
+        this.load.image('fondmenumontre','assets/fonds/fondmenumontre.png');
 
         this.load.image('enf', 'assets/ui/flags/english.png');
         this.load.image('frf', 'assets/ui/flags/france.png');
@@ -29,8 +38,14 @@ class SceneMenu extends Phaser.Scene {
 
         this.emitter = new Phaser.Events.EventEmitter();
 
-        let fondaccueil = this.add.image(960,540,'fondmenu');
-        fondaccueil.setScale(1);
+        if (montremode === false) {
+            let fondaccueil = this.add.image(960, 540, 'fondmenu');
+            fondaccueil.setScale(1);
+        }
+        else {
+            let fondaccueilmontre = this.add.image(960, 540, 'fondmenumontre');
+            fondaccueilmontre.setScale(1);
+        }
 
         let languagesign = this.add.image(225,410,'signs');
         languagesign.setScale(1);
@@ -53,23 +68,57 @@ class SceneMenu extends Phaser.Scene {
         this.jpflag.setScale(0.1);
         this.jpflag.setInteractive();
 
-        this.playbutton = this.add.image(1025,700,'playfr');
-        this.playbutton.setScale(1);
-        this.playbutton.setInteractive();
+
+
+
+        if (langue.langue === "en"){
+            this.playbutton = this.add.image(1025,700,'playen');
+            this.playbutton.setScale(1);
+            this.playbutton.setInteractive();
+            this.optionbutton = this.add.image(1025,900,'optionsen');
+            this.optionbutton.setScale(1);
+            this.optionbutton.setInteractive();
+        }
+        else if (langue.langue === "fr"){
+            this.playbutton = this.add.image(1025,700,'playfr');
+            this.playbutton.setScale(1);
+            this.playbutton.setInteractive();
+            this.optionbutton = this.add.image(1025,900,'optionsfr');
+            this.optionbutton.setScale(1);
+            this.optionbutton.setInteractive();
+        }
+        else if (langue.langue === "jp"){
+            this.playbutton = this.add.image(1025,700,'playjp');
+            this.playbutton.setScale(1);
+            this.playbutton.setInteractive();
+            this.optionbutton = this.add.image(1025,900,'optionsjp');
+            this.optionbutton.setScale(1);
+            this.optionbutton.setInteractive();
+        }
+        else{
+            this.playbutton = this.add.image(1025,700,'playfr');
+            this.playbutton.setScale(1);
+            this.playbutton.setInteractive();
+            this.optionbutton = this.add.image(1025,900,'optionsfr');
+            this.optionbutton.setScale(1);
+            this.optionbutton.setInteractive();
+        }
+
+
 
         this.frflag.on("pointerup",()=>{
             //console.log("fr")
-            this.emitter.emit('changelangue',['fr','playfr',0])
+            this.emitter.emit('changelangue',['fr','playfr',0,'optionsfr'])
         })
 
         this.enflag.on("pointerup",()=>{
             //console.log("en")
-            this.emitter.emit('changelangue',['en','playen',1])
+            this.emitter.emit('changelangue',['en','playen',1,'optionsen'])
         })
 
         this.jpflag.on("pointerup",()=>{
             //console.log("jp")
-            this.emitter.emit('changelangue',['jp','playjp',2])
+            this.emitter.emit('changelangue',['jp','playjp',2,'optionsjp'])
         })
 
         this.playbutton.on("pointerover",()=>{
@@ -119,12 +168,56 @@ class SceneMenu extends Phaser.Scene {
             this.scene.start("playGame")
         })
 
+        this.optionbutton.on("pointerover",()=>{
+            //console.log("up")
+            if (langue.langue === "en"){
+                this.optionbutton.setTexture('optionsoveren')
+            }
+            else if (langue.langue === "fr"){
+                this.optionbutton.setTexture("optionsoverfr")
+            }
+            else if (langue.langue === "jp"){
+                this.optionbutton.setTexture("optionsoverjp")
+            }
+        })
+
+        this.optionbutton.on("pointerout",()=>{
+            //console.log("up")
+            if (langue.langue === "en"){
+                this.optionbutton.setTexture('optionsen')
+            }
+            else if (langue.langue === "fr"){
+                this.optionbutton.setTexture("optionsfr")
+            }
+            else if (langue.langue === "jp"){
+                this.optionbutton.setTexture("optionsjp")
+            }
+        })
+
+        this.optionbutton.on("pointerup",()=>{
+            //console.log("up")
+            if (langue.langue === "en"){
+                this.optionbutton.setTexture('optionsoveren')
+            }
+            else if (langue.langue === "fr"){
+                this.optionbutton.setTexture("optionsoverfr")
+            }
+            else if (langue.langue === "jp"){
+                this.optionbutton.setTexture("optionsoverjp")
+            }
+
+            this.scene.start("optionsGame")
+        })
+
+
+
         this.emitter.on('changelangue',this.handlebutton,this)
     }
 
     handlebutton(data){
         //console.log(data[0]);
         this.playbutton.setTexture(data[1]);
+        this.optionbutton.setTexture(data[3]);
         langue.langue = data[0];
         this.flagselected = data[2];
     }
