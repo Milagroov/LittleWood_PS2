@@ -18,7 +18,7 @@ class Scene extends Phaser.Scene {
     this.load.image('ronce', 'assets/tilesets/ronces.png');
     this.load.image('nuage', 'assets/tilesets/nuage.png');
     this.load.image('nuagemg', 'assets/tilesets/nuage_magique.png');
-    this.load.image('checkpoint', 'assets/items/checkpoint.png');
+    this.load.image('checkpoint', 'assets/items/chekpoint.png');
 
     this.load.spritesheet('player', 'assets/images/player.png', {frameWidth: 48, frameHeight: 48});
     this.load.tilemapTiledJSON('map', 'assets/tilemaps/level.json');
