@@ -17,4 +17,3 @@ let game = new Phaser.Game(gameConfig);
 
 let langue = {langue:String,texture:Phaser.Textures};
 let montremode = false
-//LA VARIABLE MONTRE EST INVERSSEE, TRUE VEUT DIRE INACTIF

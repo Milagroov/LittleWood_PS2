@@ -11,8 +11,8 @@ class Player {
     //COLLIDERS
     this.scene.physics.add.collider(this.player, this.scene.platforms);
     this.scene.physics.add.collider(this.player, this.scene.roncesgroup, playerHit, null, this);
-    this.scene.physics.add.collider(this.player, this.scene.nuagesgroup);
-    this.scene.physics.add.collider(this.player, this.scene.nuagesMgroup);
+    this.scene.physics.add.collider(this.player, this.scene.jaunelayer);
+    this.scene.physics.add.collider(this.player, this.scene.bleulayer);
 
     function playerHit(player, ronces) {
       this.player.setVelocity(0, 0);
