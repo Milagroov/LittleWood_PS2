@@ -44,6 +44,7 @@ class Scene extends Phaser.Scene {
 
   create() {
 
+    this.scene.launch('UIGame');
 
 
     //const bg1 = this.add.image(0, 0, 'fond1').setOrigin(0, 0);
@@ -141,10 +142,12 @@ class Scene extends Phaser.Scene {
     this.events.once('finjeu', this.fin,this);
   }
 
+
+
+
   savecoordinate(){
     this.savedX = this.player.player.x;
     this.savedY = this.player.player.y;
-    console.log(this.savedX,this.savedY);
   }
 
   createCollectible(){

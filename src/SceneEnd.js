@@ -16,6 +16,8 @@ class SceneEnd extends Phaser.Scene {
 
     create(){
 
+        this.scene.stop('UIGame');
+
         this.fondacceuilfin = this.add.image(960,540,'fondmenufin');
         this.fondacceuilfin.setScale(1);
 
