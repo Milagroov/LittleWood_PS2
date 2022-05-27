@@ -17,6 +17,8 @@ class Scene extends Phaser.Scene {
     this.load.image('tiles', 'assets/tilesets/tileset.png');
     this.load.image('checkpoint', 'assets/items/chekpoint.png');
 
+    this.load.image('particulecheckpoint', 'assets/particle/particlecheckpoint.png');
+
     this.load.image('roncebas', 'assets/tilesets/roncesnewtile.png');
     this.load.image('roncehaut', 'assets/tilesets/roncesnewtileHaut.png');
     this.load.image('roncegauche', 'assets/tilesets/roncesnewtileGauche.png');
@@ -107,26 +109,25 @@ class Scene extends Phaser.Scene {
     });
     this.physics.add.overlap(this.player.player,this.checkpointgroup,this.savecoordinate,null,this);
 
-
-    this.checkpointgroup.setDepth(1)
-    this.platforms.setDepth(2)
+    this.checkpointgroup.setDepth(0);
+    this.platforms.setDepth(2);
+    this.player.player.setDepth(20);
 
 
     this.checkpointgroup.children.iterate((checkpoint)=> {
-      const fxcheckpoint = this.add.particles('red').setDepth(0);
+      const fxcheckpoint = this.add.particles('particulecheckpoint').setDepth(1);
       const checkpointemitter = fxcheckpoint.createEmitter(
         {
-          x: checkpoint+20,
-          speed: {min: 250, max: 300},
-          scale: {start: 1, end: 0.4},
-          lifespan: 500,
+          speed: {min: 50, max: 100},
+          scale: {start: 0, end: 0.3},
+          lifespan: 800,
           blendMode: 'ADD',
-          frequency: 1,
+          frequency: 0.1,
           quantity: 1,
-          rotate: {start: 45, end: 0},
-          alpha: {start: 1, end: 0},
+          rotate: {start: 0, end: 0},
+          alpha: {start: 0, end: 0.4},
         });
-      checkpointemitter.startFollow(checkpoint);
+      checkpointemitter.startFollow(checkpoint,39,55);
     });
 
 
@@ -139,8 +140,6 @@ class Scene extends Phaser.Scene {
 
     this.events.once('finjeu', this.fin,this);
   }
-
-
 
   savecoordinate(){
     this.savedX = this.player.player.x;
