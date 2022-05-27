@@ -18,12 +18,15 @@ class Scene extends Phaser.Scene {
     this.load.image('ronce', 'assets/tilesets/ronces.png');
     this.load.image('nuage', 'assets/tilesets/nuage.png');
     this.load.image('nuagemg', 'assets/tilesets/nuage_magique.png');
+    this.load.image('checkpoint', 'assets/items/chekpoint.png');
 
     this.load.spritesheet('player', 'assets/images/player.png', {frameWidth: 48, frameHeight: 48});
     this.load.tilemapTiledJSON('map', 'assets/tilemaps/level.json');
   }
 
   create() {
+
+
 
     //const bg1 = this.add.image(0, 0, 'fond1').setOrigin(0, 0);
     const map = this.make.tilemap({key: 'map'});
@@ -39,6 +42,7 @@ class Scene extends Phaser.Scene {
     this.fond2 = map.createLayer('fond2t', fond2tile,0,0);
     this.fond3 = map.createLayer('fond3t', fond3tile,0,0);
     this.fond4 = map.createLayer('fond4t', fond4tile,0,0);
+
     this.platforms = map.createLayer('terre', tileset,0,0);
     this.platforms.setCollisionByExclusion(-1, true);
 
@@ -47,7 +51,7 @@ class Scene extends Phaser.Scene {
     this.fond3.scrollFactorX=0.6;
     this.fond4.scrollFactorX=0.8;
     this.platforms.scrollFactorX=1;
-    
+
     //groupe ronces
     this.roncesgroup= this.physics.add.group({
       allowGravity: false,
@@ -75,8 +79,41 @@ class Scene extends Phaser.Scene {
       const test = this.nuagesMgroup.create(nuagesMgroup.x, nuagesMgroup.y - nuagesMgroup.height, 'nuagemg').setOrigin(0);
     });
 
+
     this.player = new Player(this);
     this.emitter = new Phaser.Events.EventEmitter();
+
+
+    this.checkpointgroup= this.physics.add.group({
+      allowGravity: false,
+      immovable: true
+    })
+    map.getObjectLayer('checkpointplan').objects.forEach((checkpointgroup) => {
+      const checkpoint = this.checkpointgroup.create(checkpointgroup.x, checkpointgroup.y - checkpointgroup.height, 'checkpoint').setOrigin(0);
+    });
+    this.physics.add.overlap(this.player.player,this.checkpointgroup,this.savecoordinate,null,this);
+
+
+    this.checkpointgroup.setDepth(1)
+    this.platforms.setDepth(2)
+
+
+    this.checkpointgroup.children.iterate((checkpoint)=> {
+      const fxcheckpoint = this.add.particles('red').setDepth(0);
+      const checkpointemitter = fxcheckpoint.createEmitter(
+        {
+          speed: {min: 250, max: 300},
+          scale: {start: 1, end: 0.4},
+          lifespan: 500,
+          blendMode: 'ADD',
+          frequency: 1,
+          quantity: 1,
+          rotate: {start: 45, end: 0},
+          alpha: {start: 1, end: 0},
+        });
+      checkpointemitter.startFollow(checkpoint);
+    });
+
 
     this.createCollectible();
 
@@ -86,6 +123,14 @@ class Scene extends Phaser.Scene {
     this.itemnum = 0;
 
     this.events.once('finjeu', this.fin,this);
+  }
+
+
+
+  savecoordinate(){
+    this.savedX = this.player.player.x;
+    this.savedY = this.player.player.y;
+    console.log(this.savedX,this.savedY);
   }
 
   createCollectible(){
