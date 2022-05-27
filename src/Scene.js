@@ -18,6 +18,7 @@ class Scene extends Phaser.Scene {
     this.load.image('ronce', 'assets/tilesets/ronces.png');
     this.load.image('nuage', 'assets/tilesets/nuage.png');
     this.load.image('nuagemg', 'assets/tilesets/nuage_magique.png');
+    this.load.image('checkpoint', 'assets/items/checkpoint.png');
 
     this.load.spritesheet('player', 'assets/images/player.png', {frameWidth: 48, frameHeight: 48});
     this.load.tilemapTiledJSON('map', 'assets/tilemaps/level.json');
@@ -47,7 +48,7 @@ class Scene extends Phaser.Scene {
     this.fond3.scrollFactorX=0.6;
     this.fond4.scrollFactorX=0.8;
     this.platforms.scrollFactorX=1;
-    
+
     //groupe ronces
     this.roncesgroup= this.physics.add.group({
       allowGravity: false,
@@ -75,6 +76,17 @@ class Scene extends Phaser.Scene {
       const test = this.nuagesMgroup.create(nuagesMgroup.x, nuagesMgroup.y - nuagesMgroup.height, 'nuagemg').setOrigin(0);
     });
 
+    this.checkpointgroup= this.physics.add.group({
+      allowGravity: false,
+      immovable: true
+    })
+    map.getObjectLayer('checkpointplan').objects.forEach((checkpointgroup) => {
+      const test = this.checkpointgroup.create(checkpointgroup.x, checkpointgroup.y - checkpointgroup.height, 'checkpoint').setOrigin(0);
+    });
+
+
+
+
     this.player = new Player(this);
     this.emitter = new Phaser.Events.EventEmitter();
 
@@ -86,6 +98,13 @@ class Scene extends Phaser.Scene {
     this.itemnum = 0;
 
     this.events.once('finjeu', this.fin,this);
+  }
+
+
+
+  savecoordinate(){
+    this.savedX = this.player.player.x;
+    this.savedY = this.player.player.y;
   }
 
   createCollectible(){

@@ -16,8 +16,8 @@ class Player {
 
     function playerHit(player, ronces) {
       this.player.setVelocity(0, 0);
-      this.player.setX(50);
-      this.player.setY(850);
+      this.player.setX(this.scene.savedX);
+      this.player.setY(this.scene.savedY);
       //this.player.play('idle', true);
       this.player.setAlpha(0);
       let tw = this.scene.tweens.add({
