@@ -15,6 +15,7 @@ class SceneUI extends Phaser.Scene {
     create() {
 
 
+        
         this.UI = this.add.image(954, 1020, 'uibleu');
         this.UI.setScale(0.5);
 
