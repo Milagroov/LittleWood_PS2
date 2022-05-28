@@ -11,11 +11,13 @@ let gameConfig = {
             gravity: { y: 1000 }
         }
     },
-    scene: [SceneMenu,SceneOptions,Scene,SceneUI,SceneEnd]
+    scene: [SceneMenu,SceneOptions,Scene,SceneUI,SceneOver,SceneEnd]
 };
 let game = new Phaser.Game(gameConfig);
 
 let langue = {langue:String,texture:Phaser.Textures};
 let montremode = false;
+let hardcoremode =false;
 let mode = false;
 let vie = 4;
+let initialtime = 10;

@@ -3,7 +3,7 @@ class Player {
   constructor(scene) {
     this.scene = scene
     this.lock=false
-    this.player = this.scene.physics.add.sprite(50, 700, 'player');
+    this.player = this.scene.physics.add.sprite(150, 1025, 'player');
     this.player.setBounce(0);
     this.player.setCollideWorldBounds(false);
 
@@ -27,6 +27,7 @@ class Player {
         ease: 'Linear',
         repeat: 5,
       });
+      vie = vie-1;
     }
 
 

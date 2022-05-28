@@ -139,8 +139,22 @@ class Scene extends Phaser.Scene {
 
     this.itemnum = 0;
 
-    this.events.once('finjeu', this.fin,this);
+    //this.events.once('finjeu', this.fin,this);
 
+    if (hardcoremode === true){
+      vie = 1
+    }
+    else if (montremode === true){
+      vie = 200
+    }
+    else{
+      vie = 4
+    }
+
+    this.savedX = 150;
+    this.savedY = 1025;
+
+    //console.log(vie);
 
   }
 
@@ -172,11 +186,20 @@ class Scene extends Phaser.Scene {
     this.itemnum++;
   }
 
-  fin(){
-    this.scene.start('finGame')
-  }
+  /*fin() {
 
+    if (this.itemnum === 2) {
+      this.events.emit('finjeu');
+    }
 
+    if (vie === 0) {
+      this.events.emit('finjeu');
+    }
+
+    if (initialtime === 0) {
+      this.events.emit('finjeu');
+    }
+  }*/
 
   update(){
 
@@ -225,9 +248,21 @@ class Scene extends Phaser.Scene {
     }
 
     if (this.itemnum === 2){
-      this.events.emit('finjeu');
+      //this.events.emit('finjeu');
+      this.scene.start('finGame');
     }
 
+    if (vie === 0){
+      //this.events.emit('finjeu');
+      this.scene.start('GameOver');
+
+    }
+
+    if (initialtime === 0){
+      //this.events.emit('finjeu');
+      this.scene.start('GameOver');
+
+    }
   }
 
 

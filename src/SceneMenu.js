@@ -23,7 +23,8 @@ class SceneMenu extends Phaser.Scene {
         this.load.image('signs', 'assets/ui/languagesign.png');
         this.load.image('title', 'assets/ui/littlewoodicon.png');
         this.load.image('fondmenu','assets/fonds/fondmenu.png');
-        this.load.image('fondmenumontre','assets/fonds/fondmenumontre.png');
+        this.load.image('fondmenuhardcore','assets/fonds/fondmenumontre.png');
+        this.load.image('fondmenumontre','assets/fonds/fondmenufin.png');
 
         this.load.image('enf', 'assets/ui/flags/english.png');
         this.load.image('frf', 'assets/ui/flags/france.png');
@@ -38,20 +39,24 @@ class SceneMenu extends Phaser.Scene {
 
         this.emitter = new Phaser.Events.EventEmitter();
 
-        if (montremode === false) {
-            let fondaccueil = this.add.image(960, 540, 'fondmenu');
-            fondaccueil.setScale(1);
-        }
-        else {
+        if (montremode === true) {
             let fondaccueilmontre = this.add.image(960, 540, 'fondmenumontre');
             fondaccueilmontre.setScale(1);
+        }
+        else if (hardcoremode === true) {
+            let fondaccueilharcore = this.add.image(960, 540, 'fondmenuhardcore');
+            fondaccueilharcore.setScale(1);
+        }
+        else {
+            let fondaccueil = this.add.image(960, 540, 'fondmenu');
+            fondaccueil.setScale(1);
         }
 
         let languagesign = this.add.image(225,410,'signs');
         languagesign.setScale(1);
 
-        let titlelogo = this.add.image(1025,380,'title');
-        titlelogo.setScale(0.6);
+        let titlelogo = this.add.image(1015,380,'title');
+        titlelogo.setScale(0.9);
 
 
 

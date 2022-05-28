@@ -6,7 +6,8 @@ class SceneOptions extends Phaser.Scene {
 
     preload(){
         this.load.image('fondmenu','assets/fonds/fondmenu.png');
-        this.load.image('fondmenumontre','assets/fonds/fondmenumontre.png');
+        this.load.image('fondmenuhardcore','assets/fonds/fondmenumontre.png');
+        this.load.image('fondmenumontre','assets/fonds/fondmenufin.png');
         this.load.image('home', 'assets/ui/home.png');
         this.load.image('homeover', 'assets/ui/home_over.png');
         this.load.image('formuien','assets/ui/controls/form_ui_en.png');
@@ -27,19 +28,31 @@ class SceneOptions extends Phaser.Scene {
         this.load.image('montreoveren','assets/ui/montre/montre_over_en.png');
         this.load.image('montreoverfr','assets/ui/montre/montre_over_fr.png');
         this.load.image('montreoverjp','assets/ui/montre/montre_over_jp.png');
+        this.load.image('hardcoreen','assets/ui/hardcore/hardcore_en.png');
+        this.load.image('hardcorefr','assets/ui/hardcore/hardcore_fr.png');
+        this.load.image('hardcorejp','assets/ui/hardcore/hardcore_jp.png');
+        this.load.image('hardcoreoveren','assets/ui/hardcore/hardcore_over_en.png');
+        this.load.image('hardcoreoverfr','assets/ui/hardcore/hardcore_over_fr.png');
+        this.load.image('hardcoreoverjp','assets/ui/hardcore/hardcore_over_jp.png');
+
+
     }
 
     create(){
 
         this.emitter = new Phaser.Events.EventEmitter();
 
-        if (montremode === false) {
-            this.fondoptionsmontre = this.add.image(960, 540, 'fondmenu');
-            this.fondoptionsmontre.setScale(1);
+        if (montremode === true) {
+            this.fondoptions = this.add.image(960, 540, 'fondmenumontre');
+            this.fondoptions.setScale(1);
+        }
+        else if (hardcoremode === true) {
+            this.fondoptions = this.add.image(960, 540, 'fondmenuhardcore');
+            this.fondoptions.setScale(1);
         }
         else {
-            this.fondoptionsmontre = this.add.image(960, 540, 'fondmenumontre');
-            this.fondoptionsmontre.setScale(1);
+            this.fondoptions = this.add.image(960, 540, 'fondmenu');
+            this.fondoptions.setScale(1);
         }
 
         this.homebutton = this.add.image(1800,990,'home');
@@ -50,9 +63,13 @@ class SceneOptions extends Phaser.Scene {
         this.controles.setScale(1);
         this.controles.setInteractive();
 
-        this.montre = this.add.image(960,800,'montrefr');
-        this.montre.setScale(1);
+        this.montre = this.add.image(960,875,'montrefr');
+        this.montre.setScale(0.8);
         this.montre.setInteractive();
+
+        this.hardcorebutton = this.add.image(960,600,'hardcorefr');
+        this.hardcorebutton.setScale(0.8);
+        this.hardcorebutton.setInteractive();
 
         this.homebutton.on("pointerover",()=>{
             this.homebutton.setTexture('homeover')
@@ -83,21 +100,23 @@ class SceneOptions extends Phaser.Scene {
             this.jump.setTexture('jumpuien');
             this.form.setTexture('formuien');
             this.controles.setTexture('controlesen');
-            this.montre.setTexture('montreen')
+            this.montre.setTexture('montreen');
+            this.hardcorebutton.setTexture('hardcoreen');
         }
         else if (langue.langue === "fr"){
             this.move.setTexture('moveuifr');
             this.jump.setTexture('jumpuifr');
             this.form.setTexture('formuifr');
             this.controles.setTexture('controlesfr');
-            this.montre.setTexture("montrefr")
+            this.montre.setTexture("montrefr");
+            this.hardcorebutton.setTexture('hardcorefr');
         }
         else if (langue.langue === "jp"){
             this.move.setTexture('moveuijp');
             this.jump.setTexture('jumpuijp');
             this.form.setTexture('formuijp');
             this.controles.setTexture('controlesjp');
-            this.montre.setTexture("montrejp")
+            this.hardcorebutton.setTexture('hardcorejp');
         }
 
         this.montre.on("pointerover",()=>{
@@ -139,6 +158,7 @@ class SceneOptions extends Phaser.Scene {
             }
 
             montremode = !montremode;
+            hardcoremode = false;
 
             if(montremode === false){
                 this.emitter.emit('changefondmode',['fondmenu'])
@@ -147,14 +167,66 @@ class SceneOptions extends Phaser.Scene {
                 this.emitter.emit('changefondmode',['fondmenumontre'])
             }
 
+            })
 
-        })
 
-        this.emitter.on('changefondmode',this.handleoptions,this)
+
+
+            this.hardcorebutton.on("pointerover",()=>{
+                //console.log("up")
+                if (langue.langue === "en"){
+                    this.hardcorebutton.setTexture('hardcoreoveren')
+                }
+                else if (langue.langue === "fr"){
+                    this.hardcorebutton.setTexture("hardcoreoverfr")
+                }
+                else if (langue.langue === "jp"){
+                    this.hardcorebutton.setTexture("hardcoreoverjp")
+                }
+            })
+
+            this.hardcorebutton.on("pointerout",()=>{
+                //console.log("up")
+                if (langue.langue === "en"){
+                    this.hardcorebutton.setTexture('hardcoreen')
+                }
+                else if (langue.langue === "fr"){
+                    this.hardcorebutton.setTexture("hardcorefr")
+                }
+                else if (langue.langue === "jp"){
+                    this.hardcorebutton.setTexture("hardcorejp")
+                }
+            })
+
+            this.hardcorebutton.on("pointerup",()=>{
+                //console.log("up")
+                if (langue.langue === "en"){
+                    this.hardcorebutton.setTexture('hardcoreoveren')
+                }
+                else if (langue.langue === "fr"){
+                    this.hardcorebutton.setTexture("hardcoreoverfr")
+                }
+                else if (langue.langue === "jp"){
+                    this.hardcorebutton.setTexture("hardcoreoverjp")
+                }
+
+                montremode = false;
+                hardcoremode = !hardcoremode;
+
+                if(hardcoremode === false){
+                    this.emitter.emit('changefondmode',['fondmenu'])
+                }
+                else{
+                    this.emitter.emit('changefondmode',['fondmenuhardcore'])
+                }
+
+            })
+
+        this.emitter.on('changefondmode',this.handleoptions,this);
 
     }
 
     handleoptions(data){
-        this.fondoptionsmontre.setTexture(data[0])
+        this.fondoptions.setTexture(data[0])
     }
 }

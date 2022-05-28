@@ -6,7 +6,7 @@ class SceneEnd extends Phaser.Scene {
 
     preload(){
         this.load.image('title', 'assets/ui/littlewoodicon.png');
-        this.load.image('fondmenufin','assets/fonds/fondmenufin.png');
+        this.load.image('fondmenu','assets/fonds/fondmenu.png');
         this.load.image('mercifr','assets/ui/Thanks/merci_fr.png');
         this.load.image('mercien','assets/ui/Thanks/merci_en.png');
         this.load.image('mercijp','assets/ui/Thanks/merci_jp.png');
@@ -18,12 +18,12 @@ class SceneEnd extends Phaser.Scene {
 
         this.scene.stop('UIGame');
 
-        this.fondacceuilfin = this.add.image(960,540,'fondmenufin');
+        this.fondacceuilfin = this.add.image(960,540,'fondmenu');
         this.fondacceuilfin.setScale(1);
 
 
-        this.tittlelogofin = this.add.image(960,300,'title');
-        this.tittlelogofin.setScale(0.6);
+        this.tittlelogofin = this.add.image(945,300,'title');
+        this.tittlelogofin.setScale(0.9);
 
         this.homebutton = this.add.image(1800,990,'home');
         this.homebutton.setScale(1);
