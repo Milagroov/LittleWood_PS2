@@ -34,3 +34,8 @@ a:visited{
 canvas{
   outline: 1px solid #333;
 }
+
+@font-face {
+  font-family: TheNextFont;
+  src: url(assets/font/TheNextFont.ttf);
+}

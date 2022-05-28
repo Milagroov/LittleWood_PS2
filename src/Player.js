@@ -35,7 +35,6 @@ class Player {
 
   create(){
     this.saut = false;
-    this.mode = false;
     this.lockmode = false;
   }
 

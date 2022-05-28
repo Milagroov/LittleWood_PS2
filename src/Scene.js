@@ -140,6 +140,8 @@ class Scene extends Phaser.Scene {
     this.itemnum = 0;
 
     this.events.once('finjeu', this.fin,this);
+
+
   }
 
 
@@ -179,7 +181,7 @@ class Scene extends Phaser.Scene {
   update(){
 
     if (this.cursors.down.isDown && this.lockmode === false){
-      this.mode = !this.mode
+      mode = !mode
       this.lockmode = true
     }
 
@@ -205,17 +207,21 @@ class Scene extends Phaser.Scene {
       this.player.moveIdle();
     }
 
-    if (this.mode === true){
+    if (mode === true){
       this.jaunelayer.setAlpha(1);
       this.bleulayer.setAlpha(0.2);
       this.jaunelayer.setCollisionByExclusion(-1, true);
       this.bleulayer.setCollisionByExclusion(-1, false);
+      //this.emitter.emit('ChangeHUD',['uijaune','filtrejaune']);
+
     }
     else{
       this.jaunelayer.setAlpha(0.2);
       this.bleulayer.setAlpha(1);
       this.jaunelayer.setCollisionByExclusion(-1, false);
       this.bleulayer.setCollisionByExclusion(-1, true);
+
+
     }
 
     if (this.itemnum === 2){

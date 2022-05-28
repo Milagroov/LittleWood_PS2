@@ -16,4 +16,6 @@ let gameConfig = {
 let game = new Phaser.Game(gameConfig);
 
 let langue = {langue:String,texture:Phaser.Textures};
-let montremode = false
+let montremode = false;
+let mode = false;
+let vie = 4;
