@@ -134,7 +134,9 @@ class Scene extends Phaser.Scene {
 
     this.createCollectible();
 
-    this.cameras.main.startFollow(this.player.player, true,1, 0);
+
+
+    this.cameras.main.startFollow(this.player.player, true,1, 0,0,285);
     this.cursors = this.input.keyboard.createCursorKeys();
 
     this.itemnum = 0;

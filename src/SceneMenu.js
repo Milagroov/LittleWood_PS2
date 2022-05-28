@@ -39,6 +39,8 @@ class SceneMenu extends Phaser.Scene {
 
         this.emitter = new Phaser.Events.EventEmitter();
 
+        //this.emitter.emit('changelangue',['fr','playfr',0,'optionsfr'])
+
         if (montremode === true) {
             let fondaccueilmontre = this.add.image(960, 540, 'fondmenumontre');
             fondaccueilmontre.setScale(1);

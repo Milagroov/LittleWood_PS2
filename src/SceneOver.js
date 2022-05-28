@@ -27,11 +27,11 @@ class SceneOver extends Phaser.Scene {
         }
 
 
-        this.homebuttonGO = this.add.image(1800,990,'home');
+        this.homebuttonGO = this.add.image(1130,825,'home');
         this.homebuttonGO.setScale(1);
         this.homebuttonGO.setInteractive();
 
-        this.retrybuttonGO = this.add.image(900,900,'retry');
+        this.retrybuttonGO = this.add.image(790,825,'retry');
         this.retrybuttonGO.setScale(1);
         this.retrybuttonGO.setInteractive();
 
