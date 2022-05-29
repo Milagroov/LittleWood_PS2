@@ -26,6 +26,10 @@ class SceneMenu extends Phaser.Scene {
         this.load.image('fondmenuhardcore','assets/fonds/fondmenumontre.png');
         this.load.image('fondmenumontre','assets/fonds/fondmenufin.png');
 
+        this.load.image('medalnormal','assets/ui/medal_normal.png');
+        this.load.image('medalmontre','assets/ui/medal_montre.png');
+        this.load.image('medalhardcore','assets/ui/medal_hardcore.png');
+
         this.load.image('enf', 'assets/ui/flags/english.png');
         this.load.image('frf', 'assets/ui/flags/france.png');
         this.load.image('jpf', 'assets/ui/flags/japon.png');
@@ -59,6 +63,42 @@ class SceneMenu extends Phaser.Scene {
 
         let titlelogo = this.add.image(1015,380,'title');
         titlelogo.setScale(0.9);
+
+        let medalnormaldisplay = this.add.image(1850,1000,'medalnormal');
+        let medalmontredisplay = this.add.image(1700,1000,'medalmontre');
+        let medalhardcoredisplay = this.add.image(1550,1000,'medalhardcore');
+
+        /*medalnormaldisplay.setAlpha(0);
+        medalmontredisplay.setAlpha(0);
+        medalhardcoredisplay.setAlpha(0);*/
+
+
+        if(normalbeaten === false){
+            //medalnormaldisplay.setAlpha(1);
+            medalnormaldisplay.setTint(0,0,0,0);
+        }
+
+        if(montrebeaten === false){
+            //medalmontredisplay.setAlpha(1);
+            medalmontredisplay.setTint(0,0,0,0);
+        }
+
+        if(hardcorebeaten === false){
+            //medalhardcoredisplay.setAlpha(1);
+            medalhardcoredisplay.setTint(0,0,0,0);
+        }
+
+        this.versiontext = this.add.text(10, 1020, 'Version 1.0', {
+            fontFamily: 'Arial',
+            color: 'white',
+            fontSize: 20,
+        });
+
+        this.authortext = this.add.text(10, 1050, 'Milagroov - 2022', {
+            fontFamily: 'Arial',
+            color: 'white',
+            fontSize: 20,
+        });
 
 
 

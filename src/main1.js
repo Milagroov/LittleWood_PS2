@@ -21,3 +21,6 @@ let hardcoremode =false;
 let mode = false;
 let vie = 4;
 let initialtime = 10;
+let normalbeaten = false;
+let montrebeaten = false;
+let hardcorebeaten = false;
