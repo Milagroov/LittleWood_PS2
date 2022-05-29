@@ -175,7 +175,7 @@ class Scene extends Phaser.Scene {
     });
 
 
-    //this.createCollectible();
+    this.createCollectible();
 
 
 
@@ -323,7 +323,7 @@ class Scene extends Phaser.Scene {
 
     if (this.itemnum === 2){
       //this.events.emit('finjeu');
-      this.scene.start('finGame');
+      this.scene.start('VictoryGame');
     }
 
     if (vie === 0){
