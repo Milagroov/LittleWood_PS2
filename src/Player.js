@@ -6,6 +6,7 @@ class Player {
     this.player = this.scene.physics.add.sprite(150, 1025, 'player');
     this.player.setBounce(0);
     this.player.setCollideWorldBounds(false);
+    this.player.setScale(0.15);
 
 
     //COLLIDERS
@@ -13,6 +14,7 @@ class Player {
     this.scene.physics.add.collider(this.player, this.scene.roncesgroup, playerHit, null, this);
     this.scene.physics.add.collider(this.player, this.scene.jaunelayer);
     this.scene.physics.add.collider(this.player, this.scene.bleulayer);
+    this.scene.physics.add.collider(this.player, this.scene.roselayer);
 
     function playerHit(player, ronces) {
       this.player.setVelocity(0, 0);
@@ -29,9 +31,8 @@ class Player {
       });
       vie = vie-1;
     }
-
-
   }
+
 
 
   create(){

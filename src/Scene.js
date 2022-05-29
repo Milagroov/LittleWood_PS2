@@ -11,6 +11,13 @@ class Scene extends Phaser.Scene {
     this.load.image('bg3', 'assets/fonds/fond3.png');
     this.load.image('bg4', 'assets/fonds/fond4.png');
 
+    this.load.image('player', 'assets/images/player.png');
+
+    this.load.image('arbredecor','assets/images/arbre.png');
+    this.load.image('panneaudecor','assets/images/panneau.png');
+    this.load.image('arbregranddecor','assets/images/arbregrand.png');
+
+
     this.load.image('coeurgele', 'assets/items/coeurgel.png');
     this.load.image('moonplant', 'assets/items/moonplant.png');
 
@@ -24,7 +31,7 @@ class Scene extends Phaser.Scene {
     this.load.image('roncegauche', 'assets/tilesets/roncesnewtileGauche.png');
     this.load.image('roncedroite', 'assets/tilesets/roncesnewtileDroite.png');
 
-    this.load.image('bleuH', 'assets/tilesets/bleuH.png');
+    /*this.load.image('bleuH', 'assets/tilesets/bleuH.png');
     this.load.image('bleuHB1', 'assets/tilesets/bleuHB1.png');
     this.load.image('bleuHB2', 'assets/tilesets/bleuHB2.png');
     this.load.image('bleuV', 'assets/tilesets/bleuV.png');
@@ -38,7 +45,13 @@ class Scene extends Phaser.Scene {
     this.load.image('jauneVB1', 'assets/tilesets/jauneVB1.png');
     this.load.image('jauneVB2', 'assets/tilesets/jauneVB2.png');
 
-    this.load.spritesheet('player', 'assets/images/player.png', {frameWidth: 48, frameHeight: 48});
+    this.load.image('roseH', 'assets/tilesets/roseH.png');
+    this.load.image('roseHB1', 'assets/tilesets/roseHB1.png');
+    this.load.image('roseHB2', 'assets/tilesets/roseHB2.png');
+    this.load.image('roseV', 'assets/tilesets/roseV.png');
+    this.load.image('roseVB1', 'assets/tilesets/roseVB1.png');
+    this.load.image('roseVB2', 'assets/tilesets/roseVB2.png');*/
+
     this.load.tilemapTiledJSON('map', 'assets/tilemaps/level.json');
   }
 
@@ -54,6 +67,9 @@ class Scene extends Phaser.Scene {
     const fond2tile = map.addTilesetImage('fond2', 'bg2');
     const fond3tile = map.addTilesetImage('fond3', 'bg3');
     const fond4tile = map.addTilesetImage('fond4', 'bg4');
+    const arbre = map.addTilesetImage('arbre','arbredecor');
+    const panneau = map.addTilesetImage('panneau','panneaudecor');
+    const arbregrand = map.addTilesetImage('arbregrand','arbregranddecor');
 
 
     //calque fonds
@@ -67,6 +83,9 @@ class Scene extends Phaser.Scene {
 
     this.jaunelayer = map.createLayer('jaune', tileset,0,0);
     this.bleulayer = map.createLayer('bleu', tileset,0,0);
+    this.roselayer = map.createLayer('rose', tileset,0,0);
+
+    this.roselayer.setAlpha(0.2);
 
 
     //PARALLAXE
@@ -101,6 +120,25 @@ class Scene extends Phaser.Scene {
     this.emitter = new Phaser.Events.EventEmitter();
 
 
+    //GROUPE DECORS
+
+    this.decorgroup= this.physics.add.group({
+      allowGravity: false,
+      immovable: true
+    })
+    map.getObjectLayer('arbreplan').objects.forEach((decorgroup) => {
+      const decors = this.decorgroup.create(decorgroup.x, decorgroup.y - decorgroup.height, 'arbredecor').setOrigin(0);
+    });
+    map.getObjectLayer('arbregrandplan').objects.forEach((decorgroup) => {
+      const decors = this.decorgroup.create(decorgroup.x, decorgroup.y - decorgroup.height, 'arbregranddecor').setOrigin(0);
+    });
+    map.getObjectLayer('panneauplan').objects.forEach((decorgroup) => {
+      const decors = this.decorgroup.create(decorgroup.x, decorgroup.y - decorgroup.height, 'panneaudecor').setOrigin(0);
+    });
+
+
+
+    //GROUPE CHECKPOINT
     this.checkpointgroup= this.physics.add.group({
       allowGravity: false,
       immovable: true
@@ -110,13 +148,18 @@ class Scene extends Phaser.Scene {
     });
     this.physics.add.overlap(this.player.player,this.checkpointgroup,this.savecoordinate,null,this);
 
-    this.checkpointgroup.setDepth(0);
-    this.platforms.setDepth(2);
+    this.decorgroup.setDepth(0);
+    this.checkpointgroup.setDepth(1);
+    this.roncesgroup.setDepth(3)
+    this.bleulayer.setDepth(9);
+    this.jaunelayer.setDepth(9);
+    this.roselayer.setDepth(9);
+    this.platforms.setDepth(10);
     this.player.player.setDepth(20);
 
 
     this.checkpointgroup.children.iterate((checkpoint)=> {
-      const fxcheckpoint = this.add.particles('particulecheckpoint').setDepth(1);
+      const fxcheckpoint = this.add.particles('particulecheckpoint').setDepth(2);
       const checkpointemitter = fxcheckpoint.createEmitter(
         {
           speed: {min: 50, max: 100},
@@ -132,7 +175,7 @@ class Scene extends Phaser.Scene {
     });
 
 
-    this.createCollectible();
+    //this.createCollectible();
 
 
 
@@ -158,8 +201,37 @@ class Scene extends Phaser.Scene {
 
     //console.log(vie);
 
+
+    this.rosetimer = 4
+
+    this.rosetimedEvent = this.time.addEvent({
+      delay: 1000,
+      callback: this.roseOnEvent,
+      callbackScope: this,
+      loop: true
+    });
+
+
   }
 
+  roseOnEvent ()
+  {
+    if( this.rosetimer != 0) {
+      this.rosetimer -= 1; // One second
+    }
+    else {
+      this.rosetimer = 4;
+      if (this.roselayer.alpha === 1){
+        this.roselayer.setAlpha(0.2);
+        this.roselayer.setCollisionByExclusion(-1, false);
+      }
+      else{
+        this.roselayer.setAlpha(1);
+        this.roselayer.setCollisionByExclusion(-1, true);
+      }
+    }
+    console.log(this.rosetimer);
+  }
 
 
 
