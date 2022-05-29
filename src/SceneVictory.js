@@ -26,6 +26,7 @@ class SceneVictory extends Phaser.Scene {
 
         this.scene.stop('UIGame');
 
+
         if(langue.langue === 'fr'){
             if(hardcoremode === true){
                 this.fondvictoire = this.add.image(960,540,'hardcorevictoryfr');

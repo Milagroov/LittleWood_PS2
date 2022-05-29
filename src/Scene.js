@@ -59,6 +59,8 @@ class Scene extends Phaser.Scene {
 
     this.scene.launch('UIGame');
 
+    initialtime = 10;
+
 
     //const bg1 = this.add.image(0, 0, 'fond1').setOrigin(0, 0);
     const map = this.make.tilemap({key: 'map'});
@@ -230,7 +232,7 @@ class Scene extends Phaser.Scene {
         this.roselayer.setCollisionByExclusion(-1, true);
       }
     }
-    console.log(this.rosetimer);
+    //console.log(this.rosetimer);
   }
 
 

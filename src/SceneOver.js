@@ -7,6 +7,8 @@ class SceneOver extends Phaser.Scene {
     preload(){
         this.load.image('gameovernormal','assets/fonds/gameover.png');
         this.load.image('gameovermontre','assets/fonds/gameover_montre.png');
+        this.load.image('gameovernormaljp','assets/fonds/gameover_jp.png');
+        this.load.image('gameovermontrejp','assets/fonds/gameover_montre_jp.png');
         this.load.image('home', 'assets/ui/home.png');
         this.load.image('homeover', 'assets/ui/home_over.png');
         this.load.image('retry', 'assets/ui/retry.png');
@@ -18,13 +20,23 @@ class SceneOver extends Phaser.Scene {
         this.scene.stop('UIGame');
 
         if(montremode === true){
-            this.fondGOmontre = this.add.image(960,540,'gameovermontre');
-            this.fondGOmontre.setScale(1);
+            if(langue.langue === 'jp'){
+                this.fondGO = this.add.image(960,540,'gameovermontrejp');
+            }
+            else{
+                this.fondGO = this.add.image(960,540,'gameovermontre');
+            }
         }
         else{
-            this.fondGO = this.add.image(960,540,'gameovernormal');
-            this.fondGO.setScale(1);
+            if(langue.langue === 'jp'){
+                this.fondGO = this.add.image(960,540,'gameovernormaljp');
+            }
+            else{
+                this.fondGO = this.add.image(960,540,'gameovernormal');
+            }
         }
+
+        this.fondGO.setScale(1);
 
 
         this.homebuttonGO = this.add.image(1130,825,'home');
