@@ -16,6 +16,11 @@ class Scene extends Phaser.Scene {
     this.load.image('arbredecor','assets/images/arbre.png');
     this.load.image('panneaudecor','assets/images/panneau.png');
     this.load.image('arbregranddecor','assets/images/arbregrand.png');
+    this.load.image('arbremoyendecor','assets/images/arbremoyen.png');
+    this.load.image('roche1decor','assets/images/roche1.png');
+    this.load.image('roche2decor','assets/images/roche2.png');
+    this.load.image('roche3decor','assets/images/roche3.png');
+
 
 
     this.load.image('coeurgele', 'assets/items/coeurgel.png');
@@ -59,7 +64,7 @@ class Scene extends Phaser.Scene {
 
     this.scene.launch('UIGame');
 
-    initialtime = 10;
+    initialtime = 91;
 
     mode = false;
 
@@ -71,9 +76,9 @@ class Scene extends Phaser.Scene {
     const fond2tile = map.addTilesetImage('fond2', 'bg2');
     const fond3tile = map.addTilesetImage('fond3', 'bg3');
     const fond4tile = map.addTilesetImage('fond4', 'bg4');
-    const arbre = map.addTilesetImage('arbre','arbredecor');
+    /*const arbre = map.addTilesetImage('arbre','arbredecor');
     const panneau = map.addTilesetImage('panneau','panneaudecor');
-    const arbregrand = map.addTilesetImage('arbregrand','arbregranddecor');
+    const arbregrand = map.addTilesetImage('arbregrand','arbregranddecor');*/
 
 
     //calque fonds
@@ -140,6 +145,19 @@ class Scene extends Phaser.Scene {
     map.getObjectLayer('panneauplan').objects.forEach((decorgroup) => {
       const decors = this.decorgroup.create(decorgroup.x, decorgroup.y - decorgroup.height, 'panneaudecor').setOrigin(0);
     });
+    map.getObjectLayer('arbremoyenplan').objects.forEach((decorgroup) => {
+      const decors = this.decorgroup.create(decorgroup.x, decorgroup.y - decorgroup.height, 'arbremoyendecor').setOrigin(0);
+    });
+    map.getObjectLayer('pierre1').objects.forEach((decorgroup) => {
+      const decors = this.decorgroup.create(decorgroup.x, decorgroup.y - decorgroup.height, 'roche1decor').setOrigin(0);
+    });
+    map.getObjectLayer('pierre2').objects.forEach((decorgroup) => {
+      const decors = this.decorgroup.create(decorgroup.x, decorgroup.y - decorgroup.height, 'roche2decor').setOrigin(0);
+    });
+    map.getObjectLayer('pierre3').objects.forEach((decorgroup) => {
+      const decors = this.decorgroup.create(decorgroup.x, decorgroup.y - decorgroup.height, 'roche3decor').setOrigin(0);
+    });
+
 
 
 

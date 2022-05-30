@@ -52,7 +52,7 @@ class SceneUI extends Phaser.Scene {
 
 
         if (montremode === true) {
-            initialtime = 10;
+            initialtime = 91;
             this.text = this.add.text(914, 20, this.formatTime(initialtime), {
                 fontFamily: 'TheNextFont',
                 color: 'black',
@@ -78,7 +78,7 @@ class SceneUI extends Phaser.Scene {
         this.minutes = Math.floor(seconds/60);
         this.partInSeconds = seconds%60;
         this.partInSeconds = this.partInSeconds.toString().padStart(2,'0');
-        if(initialtime<301) {
+        if(initialtime<91) {
             return `${this.minutes}:${this.partInSeconds}`;
         }
     }
