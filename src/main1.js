@@ -2,12 +2,23 @@ let gameConfig = {
     type: Phaser.AUTO,
     width: 1920,
     height: 1080,
+    /*scale: {
+      mode: Phaser.Scale.RESIZE,
+      autoCenter: Phaser.Scale.CENTER_BOTH,
+      min: {
+        width: 720,
+        height: 680
+      },
+      max: {
+        width: 1280,
+        height: 720,
+      }},*/
     backgroundColor: '#ffffff',
     parent: 'game',
     physics: {
         default: 'arcade',
         arcade: {
-            debug : true,
+            debug : true,fps:60,
             gravity: { y: 1000 },
         }
     },

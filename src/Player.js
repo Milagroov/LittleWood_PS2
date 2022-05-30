@@ -3,7 +3,9 @@ class Player {
   constructor(scene) {
     this.scene = scene
     this.lock=false
-    this.player = this.scene.physics.add.sprite(150, 1025, 'player');
+    //1100,800 start
+    //
+    this.player = this.scene.physics.add.sprite(1100, 800, 'player');
     this.player.setBounce(0);
     this.player.setCollideWorldBounds(false);
     this.player.setScale(0.15);
@@ -16,7 +18,7 @@ class Player {
     this.scene.physics.add.collider(this.player, this.scene.bleulayer);
     this.scene.physics.add.collider(this.player, this.scene.roselayer);
 
-    function playerHit(player, ronces) {
+    function playerHit(player) {
       this.player.setVelocity(0, 0);
       this.player.setX(this.scene.savedX);
       this.player.setY(this.scene.savedY);

@@ -61,6 +61,8 @@ class Scene extends Phaser.Scene {
 
     initialtime = 10;
 
+    mode = false;
+
 
     //const bg1 = this.add.image(0, 0, 'fond1').setOrigin(0, 0);
     const map = this.make.tilemap({key: 'map'});
@@ -88,6 +90,7 @@ class Scene extends Phaser.Scene {
     this.roselayer = map.createLayer('rose', tileset,0,0);
 
     this.roselayer.setAlpha(0.2);
+    this.bleulayer.setAlpha(0.9);
 
 
     //PARALLAXE
@@ -107,7 +110,7 @@ class Scene extends Phaser.Scene {
     });
     map.getObjectLayer('ronceshautplan').objects.forEach((roncesgroup) => {
       const roncehaut = this.roncesgroup.create(roncesgroup.x, roncesgroup.y - roncesgroup.height, 'roncehaut').setOrigin(0);
-      roncehaut.body.setSize(roncesgroup.width -2, roncesgroup.height - 22).setOffset(2, 0);
+      roncehaut.body.setSize(roncesgroup.width -8, roncesgroup.height - 22).setOffset(2, 0);
     });
     map.getObjectLayer('roncesgaucheplan').objects.forEach((roncesgroup) => {
       const roncegauche = this.roncesgroup.create(roncesgroup.x, roncesgroup.y - roncesgroup.height, 'roncegauche').setOrigin(0);
@@ -181,7 +184,7 @@ class Scene extends Phaser.Scene {
 
 
 
-    this.cameras.main.startFollow(this.player.player, true,1, 0,0,285);
+    this.cameras.main.startFollow(this.player.player, true,1, 0,0,260);
     this.cursors = this.input.keyboard.createCursorKeys();
 
     this.itemnum = 0;
@@ -243,12 +246,15 @@ class Scene extends Phaser.Scene {
   }
 
   createCollectible(){
-    this.coeurG = this.physics.add.sprite(500, 700, 'coeurgele');
+    this.coeurG = this.physics.add.sprite(13410, 115, 'coeurgele');
+    this.coeurG.setScale(0.15);
     this.coeurG.body.setAllowGravity(false);
-    this.plant = this.physics.add.sprite(1000, 500, 'moonplant');
-    this.plant.body.setAllowGravity(false);
-    this.physics.add.overlap(this.player.player,this.plant,this.collectMP,null,this);
     this.physics.add.overlap(this.player.player,this.coeurG,this.collectCG,null,this);
+
+    /*this.plant = this.physics.add.sprite(1000, 800, 'moonplant');
+    this.plant.setScale(0.15);
+    this.plant.body.setAllowGravity(false);
+    this.physics.add.overlap(this.player.player,this.plant,this.collectMP,null,this);*/
   }
 
   collectCG (player, coeurG)
@@ -256,11 +262,11 @@ class Scene extends Phaser.Scene {
     this.coeurG.disableBody(true,true);
     this.itemnum++;
   }
-  collectMP (player, coeurG)
+  /*collectMP (player, coeurG)
   {
     this.plant.disableBody(true,true);
     this.itemnum++;
-  }
+  }*/
 
   /*fin() {
 
@@ -299,7 +305,7 @@ class Scene extends Phaser.Scene {
     if (this.cursors.left.isDown ){
       this.player.moveLeft();
     }
-    else if (this.cursors.right.isDown){
+    else if (this.cursors.right.isDown) {
       this.player.moveRight();
     }
     else {
@@ -307,23 +313,24 @@ class Scene extends Phaser.Scene {
     }
 
     if (mode === true){
-      this.jaunelayer.setAlpha(1);
-      this.bleulayer.setAlpha(0.2);
-      this.jaunelayer.setCollisionByExclusion(-1, true);
-      this.bleulayer.setCollisionByExclusion(-1, false);
-      //this.emitter.emit('ChangeHUD',['uijaune','filtrejaune']);
+      if(this.jaunelayer.alpha != 1){
+        this.jaunelayer.setAlpha(1);
+        this.bleulayer.setAlpha(0.2);
+        this.jaunelayer.setCollisionByExclusion(-1, true);
+        this.bleulayer.setCollisionByExclusion(-1, false);
+      }
 
     }
     else{
-      this.jaunelayer.setAlpha(0.2);
-      this.bleulayer.setAlpha(1);
-      this.jaunelayer.setCollisionByExclusion(-1, false);
-      this.bleulayer.setCollisionByExclusion(-1, true);
-
-
+      if(this.bleulayer.alpha != 1){
+        this.jaunelayer.setAlpha(0.2);
+        this.bleulayer.setAlpha(1);
+        this.jaunelayer.setCollisionByExclusion(-1, false);
+        this.bleulayer.setCollisionByExclusion(-1, true);
+      }
     }
 
-    if (this.itemnum === 2){
+    if (this.itemnum === 1){
       //this.events.emit('finjeu');
       this.scene.start('VictoryGame');
     }

@@ -68,24 +68,21 @@ class SceneMenu extends Phaser.Scene {
         let medalmontredisplay = this.add.image(1700,1000,'medalmontre');
         let medalhardcoredisplay = this.add.image(1550,1000,'medalhardcore');
 
-        /*medalnormaldisplay.setAlpha(0);
+        medalnormaldisplay.setAlpha(0);
         medalmontredisplay.setAlpha(0);
-        medalhardcoredisplay.setAlpha(0);*/
+        medalhardcoredisplay.setAlpha(0);
 
 
-        if(normalbeaten === false){
-            //medalnormaldisplay.setAlpha(1);
-            medalnormaldisplay.setTint(0,0,0,0);
+        if(normalbeaten === true){
+            medalnormaldisplay.setAlpha(1);
         }
 
-        if(montrebeaten === false){
-            //medalmontredisplay.setAlpha(1);
-            medalmontredisplay.setTint(0,0,0,0);
+        if(montrebeaten === true){
+            medalmontredisplay.setAlpha(1);
         }
 
-        if(hardcorebeaten === false){
-            //medalhardcoredisplay.setAlpha(1);
-            medalhardcoredisplay.setTint(0,0,0,0);
+        if(hardcorebeaten === true){
+            medalhardcoredisplay.setAlpha(1);
         }
 
         this.versiontext = this.add.text(10, 1020, 'Version 1.0', {
