@@ -37,9 +37,9 @@ class Scene extends Phaser.Scene {
     this.load.image('roncedroite', 'assets/tilesets/roncesnewtileDroite.png');
 
 
-    this.load.image('formuien','assets/ui/controls/form_ui_en.png');
-    this.load.image('formuifr','assets/ui/controls/form_ui_fr.png');
-    this.load.image('formuijp','assets/ui/controls/form_ui_jp.png');
+    this.load.image('gemuien','assets/ui/controls/gem_ui_en.png');
+    this.load.image('gemuifr','assets/ui/controls/gem_ui_fr.png');
+    this.load.image('gemuijp','assets/ui/controls/gem_ui_jp.png');
 
     this.load.image('jumpuien','assets/ui/controls/jump_ui_en.png');
     this.load.image('jumpuifr','assets/ui/controls/jump_ui_fr.png');
@@ -49,6 +49,11 @@ class Scene extends Phaser.Scene {
     this.load.image('moveuifr','assets/ui/controls/move_ui_fr.png');
     this.load.image('moveuijp','assets/ui/controls/move_ui_jp.png');
 
+    this.load.image('roseuien','assets/ui/controls/rose_ui_en.png');
+    this.load.image('roseuifr','assets/ui/controls/rose_ui_fr.png');
+    this.load.image('roseuijp','assets/ui/controls/rose_ui_jp.png');
+
+    this.load.image('warningui','assets/ui/controls/warning.png');
 
 
 
@@ -154,8 +159,6 @@ class Scene extends Phaser.Scene {
     });
 
 
-
-
     //GROUPE CHECKPOINT
     this.checkpointgroup= this.physics.add.group({
       allowGravity: false,
@@ -166,6 +169,46 @@ class Scene extends Phaser.Scene {
     });
     this.physics.add.overlap(this.player.player,this.checkpointgroup,this.savecoordinate,null,this);
 
+
+    if(langue.langue==='fr'){
+      this.sauttuto = this.add.image(1725,715,'jumpuifr');
+      this.mouvementtuto = this.add.image(1080,700,'moveuifr');
+      this.formetuto = this.add.image(2715,700,'gemuifr');
+      this.rosetuto = this.add.image(4000,600,'roseuifr');
+    }
+    else if(langue.langue==='en'){
+      this.sauttuto = this.add.image(1725,715,'jumpuien');
+      this.mouvementtuto = this.add.image(1080,700,'moveuien');
+      this.formetuto = this.add.image(2715,700,'gemuien');
+      this.rosetuto = this.add.image(4000,600,'roseuien');
+    }
+    else if(langue.langue==='jp'){
+      this.sauttuto = this.add.image(1725,715,'jumpuijp');
+      this.mouvementtuto = this.add.image(1080,700,'moveuijp');
+      this.formetuto = this.add.image(2715,700,'gemuijp');
+      this.rosetuto = this.add.image(4000,600,'roseuijp');
+    }
+    else{
+      this.sauttuto = this.add.image(1725,715,'jumpuifr');
+      this.mouvementtuto = this.add.image(1080,700,'moveuifr');
+      this.formetuto = this.add.image(2715,700,'gemuifr');
+      this.rosetuto = this.add.image(4000,600,'roseuifr');
+    }
+
+    this.warningtuto = this.add.image(4607.5,725,'warningui');
+
+
+    this.sauttuto.setScale(0.7);
+    //this.sauttuto.setAlpha(0.9);
+    this.mouvementtuto.setScale(0.7);
+    this.formetuto.setScale(0.7);
+    this.rosetuto.setScale(0.7);
+
+
+
+
+
+
     this.decorgroup.setDepth(0);
     this.checkpointgroup.setDepth(1);
     this.roncesgroup.setDepth(3)
@@ -173,11 +216,12 @@ class Scene extends Phaser.Scene {
     this.jaunelayer.setDepth(9);
     this.roselayer.setDepth(9);
     this.platforms.setDepth(10);
+    this.sauttuto.setDepth(11);
+    this.mouvementtuto.setDepth(11);
+    //this.formetuto.setDepth(11);
+    //this.rosetuto.setDepth(11);
     this.player.player.setDepth(20);
 
-    if(langue.langue==='fr'){
-      this.sauterui = this.add.image(500,300,)
-    }
 
 
     this.checkpointgroup.children.iterate((checkpoint)=> {
@@ -244,7 +288,12 @@ class Scene extends Phaser.Scene {
     else {
       this.rosetimer = 4;
       if (this.roselayer.alpha === 1){
-        this.roselayer.setAlpha(0.2);
+        if(hardcoremode===true){
+          this.roselayer.setAlpha(0);
+        }
+        else{
+          this.roselayer.setAlpha(0.2);
+        }
         this.roselayer.setCollisionByExclusion(-1, false);
       }
       else{
@@ -331,8 +380,13 @@ class Scene extends Phaser.Scene {
 
     if (mode === true){
       if(this.jaunelayer.alpha != 1){
+        if(hardcoremode===true){
+          this.bleulayer.setAlpha(0);
+        }
+        else{
+          this.bleulayer.setAlpha(0.2);
+        }
         this.jaunelayer.setAlpha(1);
-        this.bleulayer.setAlpha(0.2);
         this.jaunelayer.setCollisionByExclusion(-1, true);
         this.bleulayer.setCollisionByExclusion(-1, false);
       }
@@ -340,7 +394,12 @@ class Scene extends Phaser.Scene {
     }
     else{
       if(this.bleulayer.alpha != 1){
-        this.jaunelayer.setAlpha(0.2);
+        if(hardcoremode===true){
+          this.jaunelayer.setAlpha(0);
+        }
+        else{
+          this.jaunelayer.setAlpha(0.2);
+        }
         this.bleulayer.setAlpha(1);
         this.jaunelayer.setCollisionByExclusion(-1, false);
         this.bleulayer.setCollisionByExclusion(-1, true);

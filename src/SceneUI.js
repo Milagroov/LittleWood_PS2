@@ -34,14 +34,18 @@ class SceneUI extends Phaser.Scene {
         this.crane2.setAlpha(0);
         this.crane4.setAlpha(0);
 
-        this.coeur3 = this.add.image(1035,1020,'coeur');
-        this.coeur1 = this.add.image(843,1020,'coeur');
-        this.coeur2 = this.add.image(885,1020,'coeur');
-        this.coeur4 = this.add.image(1075,1020,'coeur');
-        this.coeur1.setScale(0.5);
-        this.coeur2.setScale(0.5);
-        this.coeur4.setScale(0.5);
-        this.coeur3.setScale(0.5);
+        if (montremode === false){
+            this.coeur3 = this.add.image(1035,1020,'coeur');
+            this.coeur1 = this.add.image(843,1020,'coeur');
+            this.coeur2 = this.add.image(885,1020,'coeur');
+            this.coeur4 = this.add.image(1075,1020,'coeur');
+            this.coeur1.setScale(0.5);
+            this.coeur2.setScale(0.5);
+            this.coeur4.setScale(0.5);
+            this.coeur3.setScale(0.5);
+        }
+
+
 
         if(hardcoremode === true){
             this.crane1.setAlpha(1);
