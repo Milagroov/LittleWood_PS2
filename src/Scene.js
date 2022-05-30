@@ -36,26 +36,21 @@ class Scene extends Phaser.Scene {
     this.load.image('roncegauche', 'assets/tilesets/roncesnewtileGauche.png');
     this.load.image('roncedroite', 'assets/tilesets/roncesnewtileDroite.png');
 
-    /*this.load.image('bleuH', 'assets/tilesets/bleuH.png');
-    this.load.image('bleuHB1', 'assets/tilesets/bleuHB1.png');
-    this.load.image('bleuHB2', 'assets/tilesets/bleuHB2.png');
-    this.load.image('bleuV', 'assets/tilesets/bleuV.png');
-    this.load.image('bleuVB1', 'assets/tilesets/bleuVB1.png');
-    this.load.image('bleuVB2', 'assets/tilesets/bleuVB2.png');
 
-    this.load.image('jauneH', 'assets/tilesets/jauneH.png');
-    this.load.image('jauneHB1', 'assets/tilesets/jauneHB1.png');
-    this.load.image('jauneHB2', 'assets/tilesets/jauneHB2.png');
-    this.load.image('jauneV', 'assets/tilesets/jauneV.png');
-    this.load.image('jauneVB1', 'assets/tilesets/jauneVB1.png');
-    this.load.image('jauneVB2', 'assets/tilesets/jauneVB2.png');
+    this.load.image('formuien','assets/ui/controls/form_ui_en.png');
+    this.load.image('formuifr','assets/ui/controls/form_ui_fr.png');
+    this.load.image('formuijp','assets/ui/controls/form_ui_jp.png');
 
-    this.load.image('roseH', 'assets/tilesets/roseH.png');
-    this.load.image('roseHB1', 'assets/tilesets/roseHB1.png');
-    this.load.image('roseHB2', 'assets/tilesets/roseHB2.png');
-    this.load.image('roseV', 'assets/tilesets/roseV.png');
-    this.load.image('roseVB1', 'assets/tilesets/roseVB1.png');
-    this.load.image('roseVB2', 'assets/tilesets/roseVB2.png');*/
+    this.load.image('jumpuien','assets/ui/controls/jump_ui_en.png');
+    this.load.image('jumpuifr','assets/ui/controls/jump_ui_fr.png');
+    this.load.image('jumpuijp','assets/ui/controls/jump_ui_jp.png');
+
+    this.load.image('moveuien','assets/ui/controls/move_ui_en.png');
+    this.load.image('moveuifr','assets/ui/controls/move_ui_fr.png');
+    this.load.image('moveuijp','assets/ui/controls/move_ui_jp.png');
+
+
+
 
     this.load.tilemapTiledJSON('map', 'assets/tilemaps/level.json');
   }
@@ -179,6 +174,10 @@ class Scene extends Phaser.Scene {
     this.roselayer.setDepth(9);
     this.platforms.setDepth(10);
     this.player.player.setDepth(20);
+
+    if(langue.langue==='fr'){
+      this.sauterui = this.add.image(500,300,)
+    }
 
 
     this.checkpointgroup.children.iterate((checkpoint)=> {
