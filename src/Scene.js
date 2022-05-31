@@ -430,7 +430,6 @@ class Scene extends Phaser.Scene {
 
     if (this.itemnum === 1){
       //this.events.emit('finjeu');
-      this.scene.start('VictoryGame');
       if (hardcoremode === true){
         this.sound.get('bgmhardcore').stop();
       }
@@ -440,23 +439,24 @@ class Scene extends Phaser.Scene {
       else{
         this.sound.get('bgmnormal').stop();
       }
+      this.scene.start('VictoryGame');
     }
 
     if (vie === 0){
       //this.events.emit('finjeu');
-      this.scene.start('GameOver');
       if (hardcoremode === true){
         this.sound.get('bgmhardcore').stop();
       }
       else{
         this.sound.get('bgmnormal').stop();
       }
+      this.scene.start('GameOver');
     }
 
     if (initialtime === 0){
       //this.events.emit('finjeu');
-      this.scene.start('GameOver');
       this.sound.get('bgmmontre').stop();
+      this.scene.start('GameOver');
     }
   }
 

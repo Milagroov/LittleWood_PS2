@@ -117,6 +117,7 @@ class SceneOptions extends Phaser.Scene {
             this.jump.setTexture('jumpuijp');
             this.form.setTexture('formuijp');
             this.controles.setTexture('controlesjp');
+            this.montre.setTexture("montrejp");
             this.hardcorebutton.setTexture('hardcorejp');
         }
 
