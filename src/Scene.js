@@ -56,7 +56,7 @@ class Scene extends Phaser.Scene {
     this.load.image('warningui','assets/ui/controls/warning.png');
 
 
-    this.load.atlas('atlasanim','assets/anim/playeridle.png','assets/anim/playeridle_atlas.json')
+    this.load.atlas('atlasanim','assets/anim/anims.png','assets/anim/anims_atlas.json')
 
 
 

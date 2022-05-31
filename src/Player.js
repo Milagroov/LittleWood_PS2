@@ -23,9 +23,9 @@ class Player {
       frames: this.scene.anims.generateFrameNames('atlasanim',{
         prefix:'idle',
         start: 0,
-        end: 12,
+        end: 20,
       }),
-      frameRate: 24,
+      frameRate: 10,
       repeat: -1,
     });
 
