@@ -55,12 +55,14 @@ class Scene extends Phaser.Scene {
 
     this.load.image('warningui','assets/ui/controls/warning.png');
 
+    this.load.audio('bgmnormal','assets/sound/normal.mp3');
+    this.load.audio('bgmmontre','assets/sound/montre.mp3');
+    this.load.audio('bgmhardcore','assets/sound/hard.mp3');
+    this.load.audio('gemswitch','assets/sound/gemme.mp3');
+
+
 
     this.load.atlas('atlasanim','assets/anim/anims.png','assets/anim/anims_atlas.json')
-
-
-
-
     this.load.tilemapTiledJSON('map', 'assets/tilemaps/level.json');
   }
 
@@ -71,6 +73,17 @@ class Scene extends Phaser.Scene {
     initialtime = 91;
 
     mode = false;
+
+    if (hardcoremode === true){
+      this.ost = this.sound.add('bgmhardcore',{volume:0.5}).play();
+    }
+    else if (montremode === true){
+      this.ost = this.sound.add('bgmmontre',{volume:0.4}).play();
+    }
+    else{
+      this.ost = this.sound.add('bgmnormal',{volume: 0.2}).play();
+    }
+
 
 
     //const bg1 = this.add.image(0, 0, 'fond1').setOrigin(0, 0);
@@ -353,11 +366,16 @@ class Scene extends Phaser.Scene {
     }
   }*/
 
+  playgem(){
+    this.sound.play('gemswitch',{volume:0.1});
+  }
+
   update(){
 
     if (this.cursors.down.isDown && this.lockmode === false){
-      mode = !mode
-      this.lockmode = true
+      mode = !mode;
+      this.playgem();
+      this.lockmode = true;
     }
 
     if (this.cursors.down.isUp){
@@ -413,18 +431,32 @@ class Scene extends Phaser.Scene {
     if (this.itemnum === 1){
       //this.events.emit('finjeu');
       this.scene.start('VictoryGame');
+      if (hardcoremode === true){
+        this.sound.get('bgmhardcore').stop();
+      }
+      else if (montremode === true){
+        this.sound.get('bgmmontre').stop();
+      }
+      else{
+        this.sound.get('bgmnormal').stop();
+      }
     }
 
     if (vie === 0){
       //this.events.emit('finjeu');
       this.scene.start('GameOver');
-
+      if (hardcoremode === true){
+        this.sound.get('bgmhardcore').stop();
+      }
+      else{
+        this.sound.get('bgmnormal').stop();
+      }
     }
 
     if (initialtime === 0){
       //this.events.emit('finjeu');
       this.scene.start('GameOver');
-
+      this.sound.get('bgmmontre').stop();
     }
   }
 

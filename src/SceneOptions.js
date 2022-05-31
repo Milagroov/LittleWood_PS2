@@ -73,6 +73,7 @@ class SceneOptions extends Phaser.Scene {
 
         this.homebutton.on("pointerover",()=>{
             this.homebutton.setTexture('homeover')
+            this.sound.play('buttonsfx',{volume:0.4});
         })
 
         this.homebutton.on("pointerout",()=>{
@@ -81,7 +82,7 @@ class SceneOptions extends Phaser.Scene {
 
         this.homebutton.on("pointerup",()=>{
             this.homebutton.setTexture('homeover')
-
+            this.sound.play('buttonsfx',{volume:0.4});
             this.scene.start("menuGame")
         })
 
@@ -123,12 +124,15 @@ class SceneOptions extends Phaser.Scene {
             //console.log("up")
             if (langue.langue === "en"){
                 this.montre.setTexture('montreoveren')
+                this.sound.play('buttonsfx',{volume:0.4});
             }
             else if (langue.langue === "fr"){
                 this.montre.setTexture("montreoverfr")
+                this.sound.play('buttonsfx',{volume:0.4});
             }
             else if (langue.langue === "jp"){
                 this.montre.setTexture("montreoverjp")
+                this.sound.play('buttonsfx',{volume:0.4});
             }
         })
 
@@ -149,12 +153,15 @@ class SceneOptions extends Phaser.Scene {
             //console.log("up")
             if (langue.langue === "en"){
                 this.montre.setTexture('montreoveren')
+                this.sound.play('buttonsfx',{volume:0.4});
             }
             else if (langue.langue === "fr"){
                 this.montre.setTexture("montreoverfr")
+                this.sound.play('buttonsfx',{volume:0.4});
             }
             else if (langue.langue === "jp"){
                 this.montre.setTexture("montreoverjp")
+                this.sound.play('buttonsfx',{volume:0.4});
             }
 
             montremode = !montremode;
@@ -176,12 +183,15 @@ class SceneOptions extends Phaser.Scene {
                 //console.log("up")
                 if (langue.langue === "en"){
                     this.hardcorebutton.setTexture('hardcoreoveren')
+                    this.sound.play('buttonsfx',{volume:0.4});
                 }
                 else if (langue.langue === "fr"){
                     this.hardcorebutton.setTexture("hardcoreoverfr")
+                    this.sound.play('buttonsfx',{volume:0.4});
                 }
                 else if (langue.langue === "jp"){
                     this.hardcorebutton.setTexture("hardcoreoverjp")
+                    this.sound.play('buttonsfx',{volume:0.4});
                 }
             })
 
@@ -202,12 +212,15 @@ class SceneOptions extends Phaser.Scene {
                 //console.log("up")
                 if (langue.langue === "en"){
                     this.hardcorebutton.setTexture('hardcoreoveren')
+                    this.sound.play('buttonsfx',{volume:0.4});
                 }
                 else if (langue.langue === "fr"){
                     this.hardcorebutton.setTexture("hardcoreoverfr")
+                    this.sound.play('buttonsfx',{volume:0.4});
                 }
                 else if (langue.langue === "jp"){
                     this.hardcorebutton.setTexture("hardcoreoverjp")
+                    this.sound.play('buttonsfx',{volume:0.4});
                 }
 
                 montremode = false;

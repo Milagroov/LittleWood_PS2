@@ -37,6 +37,7 @@ class SceneMenu extends Phaser.Scene {
         this.load.image('frnbf', 'assets/ui/flags/francenb.png');
         this.load.image('jpnbf', 'assets/ui/flags/japonnb.png');
 
+        this.load.audio('buttonsfx','assets/sound/bouton.mp3');
     }
 
     create(){
@@ -153,31 +154,38 @@ class SceneMenu extends Phaser.Scene {
         this.frflag.on("pointerup",()=>{
             //console.log("fr")
             this.emitter.emit('changelangue',['fr','playfr',0,'optionsfr'])
+            this.sound.play('buttonsfx',{volume:0.4});
         })
 
         this.enflag.on("pointerup",()=>{
             //console.log("en")
             this.emitter.emit('changelangue',['en','playen',1,'optionsen'])
+            this.sound.play('buttonsfx',{volume:0.4});
         })
 
         this.jpflag.on("pointerup",()=>{
             //console.log("jp")
             this.emitter.emit('changelangue',['jp','playjp',2,'optionsjp'])
+            this.sound.play('buttonsfx',{volume:0.4});
         })
 
         this.playbutton.on("pointerover",()=>{
             //console.log("over")
             if (langue.langue === "en"){
                 this.playbutton.setTexture('playoveren')
+                this.sound.play('buttonsfx',{volume:0.4});
             }
             else if (langue.langue === "fr"){
                 this.playbutton.setTexture("playoverfr")
+                this.sound.play('buttonsfx',{volume:0.4});
             }
             else if (langue.langue === "jp"){
                 this.playbutton.setTexture("playoverjp")
+                this.sound.play('buttonsfx',{volume:0.4});
             }
             else{
                 this.playbutton.setTexture("playoverfr")
+                this.sound.play('buttonsfx',{volume:0.4});
             }
         })
 
@@ -201,12 +209,15 @@ class SceneMenu extends Phaser.Scene {
             //console.log("up")
             if (langue.langue === "en"){
                 this.playbutton.setTexture('playoveren')
+                this.sound.play('buttonsfx',{volume:0.4});
             }
             else if (langue.langue === "fr"){
                 this.playbutton.setTexture("playoverfr")
+                this.sound.play('buttonsfx',{volume:0.4});
             }
             else if (langue.langue === "jp"){
                 this.playbutton.setTexture("playoverjp")
+                this.sound.play('buttonsfx',{volume:0.4});
             }
 
             this.scene.start("playGame")
@@ -216,12 +227,15 @@ class SceneMenu extends Phaser.Scene {
             //console.log("up")
             if (langue.langue === "en"){
                 this.optionbutton.setTexture('optionsoveren')
+                this.sound.play('buttonsfx',{volume:0.4});
             }
             else if (langue.langue === "fr"){
                 this.optionbutton.setTexture("optionsoverfr")
+                this.sound.play('buttonsfx',{volume:0.4});
             }
             else if (langue.langue === "jp"){
                 this.optionbutton.setTexture("optionsoverjp")
+                this.sound.play('buttonsfx',{volume:0.4});
             }
         })
 
@@ -242,12 +256,15 @@ class SceneMenu extends Phaser.Scene {
             //console.log("up")
             if (langue.langue === "en"){
                 this.optionbutton.setTexture('optionsoveren')
+                this.sound.play('buttonsfx',{volume:0.4});
             }
             else if (langue.langue === "fr"){
                 this.optionbutton.setTexture("optionsoverfr")
+                this.sound.play('buttonsfx',{volume:0.4});
             }
             else if (langue.langue === "jp"){
                 this.optionbutton.setTexture("optionsoverjp")
+                this.sound.play('buttonsfx',{volume:0.4});
             }
 
             this.scene.start("optionsGame")

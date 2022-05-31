@@ -50,6 +50,7 @@ class SceneOver extends Phaser.Scene {
 
         this.homebuttonGO.on("pointerover",()=>{
             this.homebuttonGO.setTexture('homeover')
+            this.sound.play('buttonsfx',{volume:0.4});
         })
 
         this.homebuttonGO.on("pointerout",()=>{
@@ -58,7 +59,7 @@ class SceneOver extends Phaser.Scene {
 
         this.homebuttonGO.on("pointerup",()=>{
             this.homebuttonGO.setTexture('homeover')
-
+            this.sound.play('buttonsfx',{volume:0.4});
             this.scene.start("menuGame")
         })
 
@@ -66,6 +67,7 @@ class SceneOver extends Phaser.Scene {
 
         this.retrybuttonGO.on("pointerover",()=>{
             this.retrybuttonGO.setTexture('retryover')
+            this.sound.play('buttonsfx',{volume:0.4});
         })
 
         this.retrybuttonGO.on("pointerout",()=>{
@@ -74,7 +76,7 @@ class SceneOver extends Phaser.Scene {
 
         this.retrybuttonGO.on("pointerup",()=>{
             this.retrybuttonGO.setTexture('retryover')
-
+            this.sound.play('buttonsfx',{volume:0.4});
             this.scene.start("playGame")
         })
 

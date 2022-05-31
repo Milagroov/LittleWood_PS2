@@ -31,6 +31,7 @@ class SceneEnd extends Phaser.Scene {
 
         this.homebutton.on("pointerover",()=>{
             this.homebutton.setTexture('homeover')
+            this.sound.play('buttonsfx',{volume:0.4});
         })
 
         this.homebutton.on("pointerout",()=>{
@@ -39,7 +40,7 @@ class SceneEnd extends Phaser.Scene {
 
         this.homebutton.on("pointerup",()=>{
             this.homebutton.setTexture('homeover')
-
+            this.sound.play('buttonsfx',{volume:0.4});
             this.scene.start("menuGame")
         })
 
