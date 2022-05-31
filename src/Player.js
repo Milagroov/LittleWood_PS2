@@ -5,7 +5,7 @@ class Player {
     this.lock=false
     //1100,800 start
     //
-    this.player = this.scene.physics.add.sprite(1100, 800, 'player');
+    this.player = this.scene.physics.add.sprite(1100, 800, 'atlasanim');
     this.player.setBounce(0);
     this.player.setCollideWorldBounds(false);
     this.player.setScale(0.15);
@@ -20,33 +20,13 @@ class Player {
 
     this.scene.anims.create({
       key: 'idleanim',
-      frames: [
-        {key: 'idle1'},
-        {key: 'idle2'},
-        {key: 'idle3'},
-        {key: 'idle4'},
-        {key: 'idle5'},
-        {key: 'idle6'},
-        {key: 'idle7'},
-        {key: 'idle8'},
-        {key: 'idle9'},
-        {key: 'idle10'},
-        {key: 'idle11'},
-        {key: 'idle12'},
-        {key: 'idle13'},
-        {key: 'idle14'},
-        {key: 'idle15'},
-        {key: 'idle16'},
-        {key: 'idle17'},
-        {key: 'idle18'},
-        {key: 'idle19'},
-        {key: 'idle20'},
-        {key: 'idle21'},
-        {key: 'idle22'},
-        {key: 'idle23'},
-      ],
-      frameRate: 10,
-      repeat: -1
+      frames: this.scene.anims.generateFrameNames('atlasanim',{
+        prefix:'idle',
+        start: 0,
+        end: 12,
+      }),
+      frameRate: 24,
+      repeat: -1,
     });
 
 
@@ -54,7 +34,7 @@ class Player {
       this.player.setVelocity(0, 0);
       this.player.setX(this.scene.savedX);
       this.player.setY(this.scene.savedY);
-      this.player.play('idle', true);
+      this.player.play('idleanim', true);
       this.player.setAlpha(0);
       let tw = this.scene.tweens.add({
         targets: this.player,
