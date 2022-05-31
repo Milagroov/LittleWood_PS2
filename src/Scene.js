@@ -55,6 +55,10 @@ class Scene extends Phaser.Scene {
 
     this.load.image('warningui','assets/ui/controls/warning.png');
 
+    for (let r=1; r<=23; r++){
+      this.load.image('idle'+r,'assets/anim/idle'+r+'.png')
+    }
+
 
 
     this.load.tilemapTiledJSON('map', 'assets/tilemaps/level.json');
