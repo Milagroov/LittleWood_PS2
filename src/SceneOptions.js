@@ -35,10 +35,10 @@ class SceneOptions extends Phaser.Scene {
         this.load.image('hardcoreoverfr','assets/ui/hardcore/hardcore_over_fr.png');
         this.load.image('hardcoreoverjp','assets/ui/hardcore/hardcore_over_jp.png');
 
-
     }
 
     create(){
+
 
         this.emitter = new Phaser.Events.EventEmitter();
 
@@ -53,6 +53,8 @@ class SceneOptions extends Phaser.Scene {
         else {
             this.fondoptions = this.add.image(960, 540, 'fondmenu');
             this.fondoptions.setScale(1);
+
+
         }
 
         this.homebutton = this.add.image(1800,990,'home');
@@ -210,7 +212,6 @@ class SceneOptions extends Phaser.Scene {
             })
 
             this.hardcorebutton.on("pointerup",()=>{
-                //console.log("up")
                 if (langue.langue === "en"){
                     this.hardcorebutton.setTexture('hardcoreoveren')
                     this.sound.play('buttonsfx',{volume:0.4});
