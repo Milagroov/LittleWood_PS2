@@ -60,6 +60,10 @@ class Scene extends Phaser.Scene {
     this.load.audio('bgmhardcore','assets/sound/hard.mp3');
     this.load.audio('gemswitch','assets/sound/gemme.mp3');
 
+    this.load.audio('bip','assets/sound/bip.mp3');
+    this.load.audio('biplast','assets/sound/bip_last.mp3');
+
+
 
 
     this.load.atlas('atlasanim','assets/anim/anims.png','assets/anim/anims_atlas.json')
@@ -304,12 +308,16 @@ class Scene extends Phaser.Scene {
     }
     else {
       this.rosetimer = 4;
+      if (hardcoremode === false){
+        this.sound.play('biplast',{volume:0.3});
+      }
+
       if (this.roselayer.alpha === 1){
         if(hardcoremode===true){
           this.roselayer.setAlpha(0);
         }
         else{
-          this.roselayer.setAlpha(0.2);
+          this.roselayer.setAlpha(0.1);
         }
         this.roselayer.setCollisionByExclusion(-1, false);
       }
@@ -317,6 +325,13 @@ class Scene extends Phaser.Scene {
         this.roselayer.setAlpha(1);
         this.roselayer.setCollisionByExclusion(-1, true);
       }
+    }
+
+    if (hardcoremode === false && this.rosetimer === 1){
+      this.sound.play('bip',{volume:0.1});
+    }
+    else if (hardcoremode === false && this.rosetimer === 0){
+      this.sound.play('bip',{volume:0.1});
     }
     //console.log(this.rosetimer);
   }
@@ -432,25 +447,28 @@ class Scene extends Phaser.Scene {
       //this.events.emit('finjeu');
       if (hardcoremode === true){
         this.sound.get('bgmhardcore').stop();
+        this.scene.start('VictoryGame');
       }
       else if (montremode === true){
         this.sound.get('bgmmontre').stop();
+        this.scene.start('VictoryGame');
       }
       else{
         this.sound.get('bgmnormal').stop();
+        this.scene.start('VictoryGame');
       }
-      this.scene.start('VictoryGame');
     }
 
     if (vie === 0){
       //this.events.emit('finjeu');
       if (hardcoremode === true){
         this.sound.get('bgmhardcore').stop();
+        this.scene.start('GameOver');
       }
       else{
         this.sound.get('bgmnormal').stop();
+        this.scene.start('GameOver');
       }
-      this.scene.start('GameOver');
     }
 
     if (initialtime === 0){

@@ -13,11 +13,19 @@ class SceneOver extends Phaser.Scene {
         this.load.image('homeover', 'assets/ui/home_over.png');
         this.load.image('retry', 'assets/ui/retry.png');
         this.load.image('retryover', 'assets/ui/retry_over.png');
+
+        this.load.audio('gameoversfx','assets/sound/gameover.mp3');
     }
 
     create(){
 
         this.scene.stop('UIGame');
+
+        this.sound.get('bgmnormal').stop();
+
+        this.sound.play('gameoversfx',{volume:0.7});
+
+
 
         if(montremode === true){
             if(langue.langue === 'jp'){
