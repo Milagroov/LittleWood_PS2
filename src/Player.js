@@ -22,10 +22,21 @@ class Player {
       key: 'idleanim',
       frames: this.scene.anims.generateFrameNames('atlasanim',{
         prefix:'idle',
-        start: 0,
+        start: 1,
         end: 20,
       }),
       frameRate: 10,
+      repeat: -1,
+    });
+
+    this.scene.anims.create({
+      key: 'moveanim',
+      frames: this.scene.anims.generateFrameNames('atlasanim',{
+        prefix:'run',
+        start: 1,
+        end: 3,
+      }),
+      frameRate: 8,
       repeat: -1,
     });
 
@@ -63,11 +74,17 @@ class Player {
   moveRight() {
     this.player.setVelocityX(300);
     this.player.setFlipX(true);
+    if (this.player.body.onFloor()) {
+      this.player.play('moveanim', true);
+    }
   }
 
   moveLeft() {
     this.player.setVelocityX(-300);
     this.player.setFlipX(false);
+    if (this.player.body.onFloor()) {
+      this.player.play('moveanim', true);
+    }
   }
 
   moveIdle() {

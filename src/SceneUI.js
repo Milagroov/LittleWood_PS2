@@ -61,7 +61,6 @@ class SceneUI extends Phaser.Scene {
                 fontFamily: 'TheNextFont',
                 color: 'black',
                 fontSize: 60,
-
             });
             this.timedEvent = this.time.addEvent({
                 delay: 1000,
