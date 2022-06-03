@@ -5,7 +5,7 @@ class Player {
     this.lock=false
     //1100,800 start
     //
-    this.player = this.scene.physics.add.sprite(1100, 800, 'atlasanim');
+    this.player = this.scene.physics.add.sprite(1080, 800, 'atlasanim');
     this.player.setBounce(0);
     this.player.setCollideWorldBounds(false);
     this.player.setScale(0.15);

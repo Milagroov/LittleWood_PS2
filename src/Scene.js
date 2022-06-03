@@ -486,6 +486,14 @@ class Scene extends Phaser.Scene {
       this.sound.get('bgmmontre').stop();
       this.scene.start('GameOver');
     }
+
+    if (this.player.player.y > 1100){
+      this.player.player.setVelocity(0, 0);
+      this.player.player.setX(this.scene.savedX);
+      this.player.player.setY(this.scene.savedY);
+      this.player.player.play('idleanim', true);
+    }
+
   }
 
 
