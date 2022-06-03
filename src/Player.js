@@ -25,8 +25,19 @@ class Player {
         start: 1,
         end: 4,
       }),
-      frameRate: 8,
-      repeat: -1,
+      frameRate: 3,
+      repeat: 0,
+    });
+
+    this.scene.anims.create({
+      key: 'fallanim',
+      frames: this.scene.anims.generateFrameNames('atlasanim',{
+        prefix:'jump',
+        start: 3,
+        end: 4,
+      }),
+      frameRate: 3,
+      repeat: 0,
     });
 
     this.scene.anims.create({
@@ -79,8 +90,6 @@ class Player {
 
   jump() {
     this.player.setVelocityY(-600);
-
-    //this.player.play('jumpanim', true);
   }
 
   moveRight() {

@@ -401,17 +401,19 @@ class Scene extends Phaser.Scene {
 
     if (this.cursors.space.isDown && this.player.player.body.onFloor() && this.saut === false) {
       this.player.jump()
-      //this.player.player.play('jumpanim', true);
       this.saut = true;
     }
     if (this.cursors.space.isUp){
       this.saut = false;
     }
 
-    /*if (this.player.player.velocityY ) {
+    if (this.player.player.body.velocity.y < 0) {
       this.player.player.play('jumpanim', true);
-    }*/
+    }
 
+    else if (this.player.player.body.velocity.y > 0) {
+      this.player.player.play('fallanim', true);
+    }
 
     if (this.cursors.left.isDown ){
       this.player.moveLeft();
