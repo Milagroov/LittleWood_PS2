@@ -62,6 +62,8 @@ class Scene extends Phaser.Scene {
 
     this.load.audio('bip','assets/sound/bip.mp3');
     this.load.audio('biplast','assets/sound/bip_last.mp3');
+    this.load.audio('hit','assets/sound/hit.mp3');
+
 
 
 
@@ -399,12 +401,17 @@ class Scene extends Phaser.Scene {
 
     if (this.cursors.space.isDown && this.player.player.body.onFloor() && this.saut === false) {
       this.player.jump()
-      this.player.player.play('jumpanim', true);
+      //this.player.player.play('jumpanim', true);
       this.saut = true;
     }
     if (this.cursors.space.isUp){
       this.saut = false;
     }
+
+    /*if (this.player.player.velocityY ) {
+      this.player.player.play('jumpanim', true);
+    }*/
+
 
     if (this.cursors.left.isDown ){
       this.player.moveLeft();

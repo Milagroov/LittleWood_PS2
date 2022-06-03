@@ -19,6 +19,17 @@ class Player {
     this.scene.physics.add.collider(this.player, this.scene.roselayer);
 
     this.scene.anims.create({
+      key: 'jumpanim',
+      frames: this.scene.anims.generateFrameNames('atlasanim',{
+        prefix:'jump',
+        start: 1,
+        end: 4,
+      }),
+      frameRate: 8,
+      repeat: -1,
+    });
+
+    this.scene.anims.create({
       key: 'idleanim',
       frames: this.scene.anims.generateFrameNames('atlasanim',{
         prefix:'idle',
@@ -40,19 +51,9 @@ class Player {
       repeat: -1,
     });
 
-    this.scene.anims.create({
-      key: 'jumpanim',
-      frames: this.scene.anims.generateFrameNames('atlasanim',{
-        prefix:'jump',
-        start: 1,
-        end: 4,
-      }),
-      frameRate: 8,
-      repeat: -1,
-    });
-
 
     function playerHit(player) {
+      this.scene.sound.play('hit',{volume:0.2 });
       this.player.setVelocity(0, 0);
       this.player.setX(this.scene.savedX);
       this.player.setY(this.scene.savedY);
@@ -70,8 +71,6 @@ class Player {
     }
   }
 
-
-
   create(){
     this.saut = false;
     this.lockmode = false;
@@ -80,6 +79,7 @@ class Player {
 
   jump() {
     this.player.setVelocityY(-600);
+
     //this.player.play('jumpanim', true);
   }
 
@@ -107,6 +107,8 @@ class Player {
   }
 
 }
+
+
 
 
 
